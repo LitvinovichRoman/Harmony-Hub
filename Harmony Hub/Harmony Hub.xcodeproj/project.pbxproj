@@ -17,6 +17,8 @@
 		6237E29A2C189CC900F3CE36 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6237E2992C189CC900F3CE36 /* FirebaseFirestore */; };
 		6237E29C2C189CD800F3CE36 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6237E29B2C189CD800F3CE36 /* FirebaseStorage */; };
 		6237E29E2C189E1500F3CE36 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6237E29D2C189E1500F3CE36 /* GoogleService-Info.plist */; };
+		6254D2D32C243C3300717A9A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6254D2D22C243C3300717A9A /* TabBarController.swift */; };
+		6254D2D52C243E2500717A9A /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6254D2D42C243E2500717A9A /* Resources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		6237E2862C1896AF00F3CE36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6237E2882C1896AF00F3CE36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6237E29D2C189E1500F3CE36 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6254D2D22C243C3300717A9A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		6254D2D42C243E2500717A9A /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		620F6F5F2C23BB12005E0A18 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		6237E26B2C1896AD00F3CE36 = {
 			isa = PBXGroup;
 			children = (
@@ -66,7 +77,11 @@
 			isa = PBXGroup;
 			children = (
 				6237E28F2C1897CC00F3CE36 /* Application */,
+				62807DFB2C22F2BA004A829E /* Models */,
+				62807DFC2C22F2C5004A829E /* Views */,
+				62807DFE2C22F2D9004A829E /* ViewModels */,
 				6237E2902C18992200F3CE36 /* Data */,
+				623CE45E2C238A6F00E5F2B9 /* Helpers */,
 				6237E28E2C1897B600F3CE36 /* Supporting Files */,
 			);
 			path = "Harmony Hub";
@@ -105,6 +120,53 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		623CE45E2C238A6F00E5F2B9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				620F6F5F2C23BB12005E0A18 /* Extensions */,
+				6254D2D42C243E2500717A9A /* Resources.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6254D2D12C243C0400717A9A /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				6254D2D22C243C3300717A9A /* TabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		62807DFB2C22F2BA004A829E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		62807DFC2C22F2C5004A829E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				62807DFD2C22F2CC004A829E /* Controllers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		62807DFD2C22F2CC004A829E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6254D2D12C243C0400717A9A /* TabBar */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		62807DFE2C22F2D9004A829E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,7 +250,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6237E2822C1896AD00F3CE36 /* Harmony_Hub.xcdatamodeld in Sources */,
+				6254D2D32C243C3300717A9A /* TabBarController.swift in Sources */,
 				6237E2782C1896AD00F3CE36 /* AppDelegate.swift in Sources */,
+				6254D2D52C243E2500717A9A /* Resources.swift in Sources */,
 				6237E27A2C1896AD00F3CE36 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
