@@ -30,33 +30,27 @@ private extension TabBarController {
         
         tabBar.tintColor = Resources.Colors.TabBar.active
         tabBar.barTintColor = Resources.Colors.TabBar.inactive
-        tabBar.backgroundColor = UIColor(.white).withAlphaComponent(0.6)
- 
+        tabBar.backgroundColor = Resources.Colors.TabBar.barBackground
+
         tabBar.layer.cornerRadius = 40
-        
-        
-        let mainController = UIViewController()
-        let breathController = UIViewController()
-        let thoughtsController = UIViewController()
-        let profileController = UIViewController()
 
         lazy var mainNavigationController: UINavigationController = {
-            let navigationController = UINavigationController(rootViewController: mainController)
+            let navigationController = UINavigationController(rootViewController: MainViewController())
             return navigationController
         }()
 
         lazy var breathNavigationController: UINavigationController = {
-            let navigationController = UINavigationController(rootViewController: breathController)
+            let navigationController = UINavigationController(rootViewController: BreathViewController())
             return navigationController
         }()
 
         lazy var thoughtsNavigationController: UINavigationController = {
-            let navigationController = UINavigationController(rootViewController: thoughtsController)
+            let navigationController = UINavigationController(rootViewController: ThoughtsViewController())
             return navigationController
         }()
 
         lazy var profileNavigationController: UINavigationController = {
-            let navigationController = UINavigationController(rootViewController: profileController)
+            let navigationController = UINavigationController(rootViewController: ProfileViewController())
             return navigationController
         }()
         
