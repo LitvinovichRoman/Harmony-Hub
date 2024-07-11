@@ -10,7 +10,7 @@ import UIKit
 enum Resources {
     enum Colors {
         enum TabBar {
-            static var active = #colorLiteral(red: 0.9647058824, green: 0.4274509804, blue: 0.3882352941, alpha: 1)
+            static var active = #colorLiteral(red: 0.631372549, green: 0.4666666667, blue: 0.4431372549, alpha: 1)
             static var inactive = #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
             static var barBackground = #colorLiteral(red: 0.9142437178, green: 0.9142437178, blue: 0.9142437178, alpha: 1)
         }
