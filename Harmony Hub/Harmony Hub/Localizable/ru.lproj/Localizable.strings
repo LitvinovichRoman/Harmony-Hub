@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  Harmony Hub
+
+  Created by Roman Litvinovich on 14.07.24.
+  
+*/
+
+"main" = "Главная";
+"breath" = "Дыхание";
+"thoughts" = "Мысли";
+"profile" = "Профиль";
+"dayAdvice" = "Совет дня";
+"category" = "Категори";
+"moreButtonTitle" = "Еще";
+"categoryTitle" = "Выберите категорию";
+"posesTitle" = "Выберите позу";
+"poseScreenTittle" = "Позы";
+"registrationTitle" = "Давайте зарегистрируемся";
+"loginTitle" = "Войдите в учетную запись";
+"loginSubTitle" = "Добро пожаловать!";
+"emailPlaceholder" = "Введите email";
+"passPlaceholder" = "Введите пароль";
+"rePassPlaceholder" = "Повторите пароль";
+"regButtonTitle" = "Зарегистрироваться";
+"logButtonTitle" = "Войти";
+"googleButtonTitle" = "Войти через google";
+"regNowSubTitle" = "Нет аккаунта?";
+"regNowButtonTitle" = "Зарегистрироваться";
+"thoughtsScreenTitle" = "Твои мысли";
+"addButtonTitle" = "Записать мысль";
+"breathScreenTitle" = "Контроль дыхания";
+"startButtonTitle" = "Начать";
+"stopButtonTitle" = "Остановить";
+"logo" = "Harmony Hub";
+"logoutButtonTitle" = "Выйти из профиля";
+"projectInfoButtonTitle" = "О проекте";

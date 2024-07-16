@@ -8,61 +8,52 @@
 import UIKit
 
 enum Resources {
-    enum Colors {
-        enum TabBar {
-            static var active = #colorLiteral(red: 0.631372549, green: 0.4666666667, blue: 0.4431372549, alpha: 1)
-            static var inactive = #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
-            static var barBackground = #colorLiteral(red: 0.9142437178, green: 0.9142437178, blue: 0.9142437178, alpha: 1)
-        }
-    }
-    
     enum Strings {
         enum TabBar {
-            static var main = "Главная"
-            static var breath = "Дыхание"
-            static var thoughts = "Мысли"
-            static var profile = "Профиль"
+            static var main: String = .localize("main")
+            static var breath: String = .localize("breath")
+            static var thoughts: String = .localize("thoughts")
+            static var profile: String = .localize("profile")
         }
         
         enum MainScreen {
-            static var dayAdvice = "Совет дня"
-            static var category = "Категори"
-            static var moreButtonTitle = "Еще"
-            static var categoryTitle = "Выберите категорию"
-            static var posesTitle = "Выберите позу"
-            static var poseScrinTittle = "Позы"
+            static var dayAdvice: String = .localize("dayAdvice")
+            static var category: String = .localize("category")
+            static var moreButtonTitle: String = .localize("moreButtonTitle")
+            static var categoryTitle: String = .localize("categoryTitle")
+            static var posesTitle: String = .localize("posesTitle")
+            static var poseScreenTittle: String = .localize("poseScreenTittle")
         }
         
         enum Auth {
-            static var registrationTitle = "Давайте зарегистрируемся"
-            static var loginTitle = "Войдите в учетную запись"
-            static var loginSubTitle = "Добро пожаловать!"
-            static var emailPlaceholder = "Введите email"
-            static var passPlaceholder = "Введите пароль"
-            static var rePassPlaceholder = "Повторите пароль"
-            static var regButtonTitle = "Зарегистрироваться"
-            static var logButtonTitle = "Войти"
-            static var googleButtonTitle = "Войти через google"
-            static var regNowSubTitle = "Нет аккаунта?"
-            static var regNowButtonTitle = "Зарегистрироваться"
+            static var registrationTitle: String = .localize("registrationTitle")
+            static var loginTitle: String = .localize("loginTitle")
+            static var loginSubTitle: String = .localize("loginSubTitle")
+            static var emailPlaceholder: String = .localize("emailPlaceholder")
+            static var passPlaceholder: String = .localize("passPlaceholder")
+            static var rePassPlaceholder: String = .localize("rePassPlaceholder")
+            static var regButtonTitle: String = .localize("regButtonTitle")
+            static var logButtonTitle: String = .localize("logButtonTitle")
+            static var googleButtonTitle: String = .localize("googleButtonTitle")
+            static var regNowSubTitle: String = .localize("regNowSubTitle")
+            static var regNowButtonTitle: String = .localize("regNowButtonTitle")
         }
         
         enum ThoughtsScreen {
-            static var thoughtsScreenTitle = "Твои мысли"
-            static var addButtonTitle = "Записать мысль"
+            static var thoughtsScreenTitle: String = .localize("thoughtsScreenTitle")
+            static var addButtonTitle: String = .localize("addButtonTitle")
         }
         
         enum BreathScreen {
-            static var breathScreenTitle = "Контроль дыхания"
-            static var startButtonTitle = "Начать"
-            static var stopButtonTitle = "Остановить"
+            static var breathScreenTitle: String = .localize("breathScreenTitle")
+            static var startButtonTitle: String = .localize("startButtonTitle")
+            static var stopButtonTitle: String = .localize("stopButtonTitle")
         }
         
-        enum  profileScreen {
-            static var logo = "Harmony Hub"
-            static var logoutButtonTitle = "Выйти из профиля"
-            static var projectInfoButtonTitle = "О проекте"
-        }
+        enum ProfileScreen {
+            static var logo: String = .localize("logo") }
+        static var logoutButtonTitle: String = .localize("logoutButtonTitle")
+        static var projectInfoButtonTitle: String = .localize("projectInfoButtonTitle")
     }
     
     enum Images {
@@ -82,6 +73,14 @@ enum Resources {
         
         enum Thoughts {
             static var newThought = #imageLiteral(resourceName: "newThought")
+        }
+    }
+    
+    enum Colors {
+        enum TabBar {
+            static var active = #colorLiteral(red: 0.631372549, green: 0.4666666667, blue: 0.4431372549, alpha: 1)
+            static var inactive = #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
+            static var barBackground = #colorLiteral(red: 0.9142437178, green: 0.9142437178, blue: 0.9142437178, alpha: 1)
         }
     }
 }
