@@ -1,5 +1,5 @@
 //
-//  TabBarController.swift
+//  TabBar.swift
 //  Harmony Hub
 //
 //  Created by Roman Litvinovich on 20.06.24.
@@ -15,7 +15,7 @@ enum Tabs: Int {
     case profile
 }
 
-final class TabBarController: UITabBarController {
+final class TabBar: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,7 +24,7 @@ final class TabBarController: UITabBarController {
 }
 
 //MARK: - Configure tabBar
-private extension TabBarController {
+private extension TabBar {
     func configure() {
         view.backgroundColor = .white
         
@@ -35,22 +35,22 @@ private extension TabBarController {
         tabBar.layer.cornerRadius = 40
 
         lazy var mainNavigationController: UINavigationController = {
-            let navigationController = UINavigationController(rootViewController: MainViewController())
+            let navigationController = UINavigationController(rootViewController: MainView())
             return navigationController
         }()
 
         lazy var breathNavigationController: UINavigationController = {
-            let navigationController = UINavigationController(rootViewController: BreathViewController())
+            let navigationController = UINavigationController(rootViewController: BreathView())
             return navigationController
         }()
 
         lazy var thoughtsNavigationController: UINavigationController = {
-            let navigationController = UINavigationController(rootViewController: ThoughtsViewController())
+            let navigationController = UINavigationController(rootViewController: ThoughtsView())
             return navigationController
         }()
 
         lazy var profileNavigationController: UINavigationController = {
-            let navigationController = UINavigationController(rootViewController: ProfileViewController())
+            let navigationController = UINavigationController(rootViewController: ProfileView())
             return navigationController
         }()
         

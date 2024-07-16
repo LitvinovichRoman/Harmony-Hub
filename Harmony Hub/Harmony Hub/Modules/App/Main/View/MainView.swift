@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  MainView.swift
 //  Harmony Hub
 //
 //  Created by Roman Litvinovich on 27.06.24.
@@ -7,17 +7,16 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainView: UIViewController {
     //MARK: - Properties
     private lazy var backgroundImage: UIImageView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isUserInteractionEnabled = true
         $0.image = Resources.Images.Background.main
         $0.alpha = 0.3
         return $0
     }(UIImageView())
 
-    //MARK: - Life cicle
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -26,14 +25,14 @@ class MainViewController: UIViewController {
 }
 
 //MARK: - Configure layout
-private extension MainViewController {
+private extension MainView {
     private func configureLayout() {
         configureBackground()
     }
     
     //MARK: - Configure background
     func configureBackground() {
-        view.addSubview(backgroundImage)
+        view.addSubviews(backgroundImage)
         NSLayoutConstraint.activate([
             backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
