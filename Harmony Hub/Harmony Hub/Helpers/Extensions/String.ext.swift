@@ -7,9 +7,14 @@
 
 import Foundation
 
+//MARK: -- Localize
 extension String {
     static func localize(_ text: String.LocalizationValue) -> String {
         String(localized: text)
     }
 }
 
+//MARK: -- UserInfo Keyas
+extension String {
+    static let state = "state"
+}
