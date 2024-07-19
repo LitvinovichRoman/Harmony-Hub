@@ -7,40 +7,24 @@
 
 import UIKit
 
-class ProfileView: UIViewController {
+protocol ProfileViewProtocol: AnyObject {}
+
+class ProfileView: BaseAppView, ProfileViewProtocol {
+    //MARK: - Presenter
+    var presenter: ProfileViewPresenterProtocol!
+    
     //MARK: - Properties
-    private lazy var backgroundImage: UIImageView = {
-        $0.isUserInteractionEnabled = true
-        $0.image = Resources.Images.Background.profile
-        $0.alpha = 0.3
-        return $0
-    }(UIImageView())
+  
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        configureLayout()
+        configureBackground(with: Resources.Backgrounds.profile)
     }
 }
 
 //MARK: - Configure layout
-private extension ProfileView {
-    private func configureLayout() {
-        configureBackground()
-    }
-    
-    //MARK: - Configure background
-    func configureBackground() {
-        view.addSubviews(backgroundImage)
-        NSLayoutConstraint.activate([
-            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
-}
+private extension ProfileView {}
 
 #Preview() {
     ProfileView()

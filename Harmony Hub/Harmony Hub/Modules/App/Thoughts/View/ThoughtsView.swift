@@ -7,37 +7,28 @@
 
 import UIKit
 
-class ThoughtsView: UIViewController {
+protocol ThoughtsViewProtocol: AnyObject {
+    
+}
+
+class ThoughtsView: BaseAppView, ThoughtsViewProtocol {
+    //MARK: - Presenter
+    var presenter: ThoughtsViewPresenterProtocol!
+    
     //MARK: - Properties
-    private lazy var backgroundImage: UIImageView = {
-        $0.isUserInteractionEnabled = true
-        $0.image = Resources.Images.Background.thoughts
-        $0.alpha = 0.3
-        return $0
-    }(UIImageView())
+   
 
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        configureLayout()
+        configureBackground(with: Resources.Backgrounds.thoughts)
     }
 }
 
 //MARK: - Configure layout
-private extension ThoughtsView {
-    private func configureLayout() {
-        configureBackground()
-    }
-    
-    //MARK: - Configure background
-    func configureBackground() {
-        view.addSubviews(backgroundImage)
-        NSLayoutConstraint.activate([
-            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
+private extension ThoughtsView {}
+
+
+#Preview() {
+    ThoughtsView()
 }
