@@ -33,7 +33,7 @@ enum MainViewConstants {
     static let collectionViewBottom: CGFloat = -70
 }
 
-//MARK: -- CategoryDetailViewConstant
+//MARK: -- CategoryDetailViewConstants
 enum CategoryDetailViewConstants {
     static let cellIdentifier: String = "CategoryDetailCell"
     static let cornerRadius: CGFloat = 25
@@ -64,16 +64,16 @@ enum TabBarViewConstants {
     static let itemOffset: Int = 0
 }
 
-//MARK: -- TabViewConstant
-enum TabViewConstant {
+//MARK: -- TabViewConstants
+enum TabViewConstants {
     static let cornerRadius: CGFloat = 35
     static let backgroundColor: UIColor = .white
     static let borderWidth: CGFloat = 2
     static let borderColor = UIColor.systemGray6.cgColor
 }
 
-//MARK: -- TabBarItemConstant
-enum TabBarItemConstant {
+//MARK: -- TabBarItemConstants
+enum TabBarItemConstants {
     static let animateDuration: TimeInterval = 0.2
     static let cornerRadius: CGFloat = 20
     static let tabImageHeightAnchor: CGFloat = 25

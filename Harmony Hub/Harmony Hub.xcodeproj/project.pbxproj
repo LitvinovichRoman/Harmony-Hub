@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		62212D132C5267E70083C4E8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62212D122C5267E70083C4E8 /* Constants.swift */; };
-		62212D152C526A6F0083C4E8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62212D142C526A6F0083C4E8 /* User.swift */; };
 		62212D1A2C526CEA0083C4E8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 62212D192C526CEA0083C4E8 /* Kingfisher */; };
 		62212D1D2C526D3E0083C4E8 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 62212D1C2C526D3E0083C4E8 /* GoogleSignIn */; };
 		62212D1F2C526D3E0083C4E8 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62212D1E2C526D3E0083C4E8 /* GoogleSignInSwift */; };
@@ -26,6 +25,7 @@
 		623A40D42C415C5F00FB63C5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623A40D32C415C5F00FB63C5 /* LoginView.swift */; };
 		623A40D62C415CD000FB63C5 /* RegistraionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623A40D52C415CD000FB63C5 /* RegistraionView.swift */; };
 		623A40D82C415D5800FB63C5 /* UIView.ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623A40D72C415D5800FB63C5 /* UIView.ext.swift */; };
+		625074C42C60E89100C791CF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625074C32C60E89100C791CF /* User.swift */; };
 		6254D2D52C243E2500717A9A /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6254D2D42C243E2500717A9A /* Resources.swift */; };
 		62599F912C5B90F600DE28C8 /* UIImageView.ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62599F902C5B90F600DE28C8 /* UIImageView.ext.swift */; };
 		62599F992C5B9DAC00DE28C8 /* TabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62599F982C5B9DAB00DE28C8 /* TabBarPresenter.swift */; };
@@ -64,7 +64,6 @@
 
 /* Begin PBXFileReference section */
 		62212D122C5267E70083C4E8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		62212D142C526A6F0083C4E8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		62212D222C52700B0083C4E8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		6237E2742C1896AD00F3CE36 /* Harmony Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Harmony Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6237E2772C1896AD00F3CE36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +76,7 @@
 		623A40D32C415C5F00FB63C5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		623A40D52C415CD000FB63C5 /* RegistraionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistraionView.swift; sourceTree = "<group>"; };
 		623A40D72C415D5800FB63C5 /* UIView.ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.ext.swift; sourceTree = "<group>"; };
+		625074C32C60E89100C791CF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6254D2D42C243E2500717A9A /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		62599F902C5B90F600DE28C8 /* UIImageView.ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.ext.swift; sourceTree = "<group>"; };
 		62599F982C5B9DAB00DE28C8 /* TabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPresenter.swift; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 		623A40D22C415C4E00FB63C5 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				62B97D812C44061400E0FB2B /* Model */,
+				625074C22C60E88300C791CF /* Model */,
 				62B97D7D2C4405E400E0FB2B /* Login */,
 				62B97D7E2C4405F200E0FB2B /* Registration */,
 			);
@@ -235,9 +235,11 @@
 		623A40D92C415DAF00FB63C5 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				623A40E72C415F9E00FB63C5 /* Model */,
 				623A40DF2C415E0E00FB63C5 /* View */,
+				623A40E72C415F9E00FB63C5 /* Model */,
 				623A40E82C415FA700FB63C5 /* Presenter */,
+				62B641052C5A6E7C00996411 /* CtegoryDetail */,
+				625074C52C60E9B900C791CF /* PosesDetail */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -390,6 +392,45 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		625074C22C60E88300C791CF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				625074C32C60E89100C791CF /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		625074C52C60E9B900C791CF /* PosesDetail */ = {
+			isa = PBXGroup;
+			children = (
+				625074C82C60E9F900C791CF /* Model */,
+				625074C72C60E9F300C791CF /* View */,
+				625074C62C60E9EA00C791CF /* Presenter */,
+			);
+			path = PosesDetail;
+			sourceTree = "<group>";
+		};
+		625074C62C60E9EA00C791CF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		625074C72C60E9F300C791CF /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		625074C82C60E9F900C791CF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		6254D2D12C243C0400717A9A /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,37 +439,6 @@
 				62599F972C5B9D2600DE28C8 /* Presenter */,
 			);
 			path = TabBar;
-			sourceTree = "<group>";
-		};
-		62599F922C5B9B3F00DE28C8 /* PosesDetail */ = {
-			isa = PBXGroup;
-			children = (
-				62599F952C5B9B6600DE28C8 /* Model */,
-				62599F942C5B9B5C00DE28C8 /* View */,
-				62599F932C5B9B5500DE28C8 /* Presenter */,
-			);
-			path = PosesDetail;
-			sourceTree = "<group>";
-		};
-		62599F932C5B9B5500DE28C8 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		62599F942C5B9B5C00DE28C8 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		62599F952C5B9B6600DE28C8 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		62599F962C5B9D1F00DE28C8 /* View */ = {
@@ -604,21 +614,11 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		62B97D812C44061400E0FB2B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				62212D142C526A6F0083C4E8 /* User.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		62B97D822C44065000E0FB2B /* App */ = {
 			isa = PBXGroup;
 			children = (
 				6254D2D12C243C0400717A9A /* TabBar */,
 				623A40D92C415DAF00FB63C5 /* Main */,
-				62B641052C5A6E7C00996411 /* CtegoryDetail */,
-				62599F922C5B9B3F00DE28C8 /* PosesDetail */,
 				623A40DA2C415DB400FB63C5 /* Breath */,
 				623A40DB2C415DC800FB63C5 /* Thoughts */,
 				623A40DC2C415DD400FB63C5 /* Profile */,
@@ -741,7 +741,6 @@
 				6237E2822C1896AD00F3CE36 /* Harmony_Hub.xcdatamodeld in Sources */,
 				62F6FE402C46A8D20084AC00 /* MainViewPresenter.swift in Sources */,
 				6237E2782C1896AD00F3CE36 /* AppDelegate.swift in Sources */,
-				62212D152C526A6F0083C4E8 /* User.swift in Sources */,
 				62B640FF2C5A6B4700996411 /* MainModel.swift in Sources */,
 				62B641012C5A6E4200996411 /* CategoryDetailView.swift in Sources */,
 				62A0614D2C49433A00A896AB /* TextField.swift in Sources */,
@@ -759,6 +758,7 @@
 				6254D2D52C243E2500717A9A /* Resources.swift in Sources */,
 				62212D232C52700B0083C4E8 /* FirebaseManager.swift in Sources */,
 				62599F912C5B90F600DE28C8 /* UIImageView.ext.swift in Sources */,
+				625074C42C60E89100C791CF /* User.swift in Sources */,
 				623A40D62C415CD000FB63C5 /* RegistraionView.swift in Sources */,
 				62599FAA2C5BD49800DE28C8 /* TabView.swift in Sources */,
 				62F6FE4C2C46B3F00084AC00 /* NSNotification.Name.ext.swift in Sources */,
