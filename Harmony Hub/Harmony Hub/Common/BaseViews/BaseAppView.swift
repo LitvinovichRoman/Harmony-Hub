@@ -9,7 +9,7 @@ import UIKit
 
 class BaseAppView: UIViewController {
 
-    lazy var imageView: UIImageView = {
+    lazy var contentImage: UIImageView = {
         $0.isUserInteractionEnabled = true
         return $0
     }(UIImageView())
@@ -17,20 +17,19 @@ class BaseAppView: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
     }
 }
 
 //MARK: - Configure layout
 extension BaseAppView {
     func configureBackground(with image: UIImage) {
-        view.addSubviews(imageView)
-        imageView.image = image
+        view.addSubviews(contentImage)
+        contentImage.image = image
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            contentImage.topAnchor.constraint(equalTo: view.topAnchor),
+            contentImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            contentImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentImage.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 }
