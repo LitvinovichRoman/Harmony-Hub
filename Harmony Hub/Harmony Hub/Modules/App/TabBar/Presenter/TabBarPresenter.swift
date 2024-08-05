@@ -2,65 +2,52 @@
 //  TabBarPresenter.swift
 //  Harmony Hub
 //
-//  Created by Roman Litvinovich on 16.07.24.
+//  Created by Roman Litvinovich on 1.08.24.
 //
 
 import UIKit
 
-protocol TabBarPresenterProtocol: AnyObject {
+protocol TabBarPresenterProtocol {
     init(view: TabBarViewProtocol)
+    func createTabItems() -> [TabItem]
 }
 
 class TabBarPresenter: TabBarPresenterProtocol {
     weak var view: TabBarViewProtocol?
+    
+    var tabItems: [TabItem] = []
     
     required init(view: any TabBarViewProtocol) {
         self.view = view
         setupControllers()
     }
     
-    private func setupControllers() {
-         lazy var mainNavigationController: UINavigationController = {
-             let navigationController = UINavigationController(rootViewController: Builder.getMainView())
-             return navigationController
-         }()
+    func createTabItems() -> [TabItem] {
+        tabItems = [
+            TabItem(index: 0, tabText: Resources.Strings.TabBar.main, tabImage: Resources.Icons.TabBar.main),
+            TabItem(index: 1, tabText: Resources.Strings.TabBar.breath, tabImage: Resources.Icons.TabBar.breath),
+            TabItem(index: 2, tabText: Resources.Strings.TabBar.thoughts, tabImage: Resources.Icons.TabBar.thoughts),
+            TabItem(index: 3, tabText: Resources.Strings.TabBar.profile, tabImage: Resources.Icons.TabBar.profile)
+        ]
 
-         lazy var breathNavigationController: UINavigationController = {
-             let navigationController = UINavigationController(rootViewController: Builder.getBreathView())
-             return navigationController
-         }()
+        return tabItems
+    }
 
-         lazy var thoughtsNavigationController: UINavigationController = {
-             let navigationController = UINavigationController(rootViewController: Builder.getThoughtsView())
-             return navigationController
-         }()
-
-         lazy var profileNavigationController: UINavigationController = {
-             let navigationController = UINavigationController(rootViewController: Builder.getProfileView())
-             return navigationController
-         }()
+    func setupControllers() {
+        let mainView = Builder.getMainView()
+        let breathView = Builder.getBreathView()
+        let thoughtsView = Builder.getThoughtsView()
+        let profileView =  Builder.getProfileView()
         
-         
-         mainNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.main,
-                                                  image: Resources.Icons.TabBar.main,
-                                                  tag: Tabs.main.rawValue)
-         
-         breathNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.breath,
-                                                  image: Resources.Icons.TabBar.breath,
-                                                  tag: Tabs.breath.rawValue)
-         
-         thoughtsNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.thoughts,
-                                                  image: Resources.Icons.TabBar.thoughts,
-                                                  tag: Tabs.thoughts.rawValue)
-         
-         profileNavigationController.tabBarItem = UITabBarItem(title: Resources.Strings.TabBar.profile,
-                                                  image: Resources.Icons.TabBar.profile,
-                                                  tag: Tabs.profile.rawValue)
+      
         
-        view?.setControllers(views: [ 
-            mainNavigationController,
-            breathNavigationController,
-            thoughtsNavigationController,
-            profileNavigationController])
-     }
+        view?.setControllers(views: [
+            UINavigationController(rootViewController: mainView),
+            UINavigationController(rootViewController: breathView),
+            UINavigationController(rootViewController: thoughtsView),
+            UINavigationController(rootViewController: profileView)])
+    }
+    
 }
+
+
