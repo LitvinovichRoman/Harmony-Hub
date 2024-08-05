@@ -20,7 +20,7 @@ protocol RegistraionViewDelegate {
 }
 
 // MARK: - BaseAuthClass
-class BaseAuthView: UIViewController {
+class BaseAuthView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
     //MARK: -- Properties [lazy]
     private lazy var contentImage: UIImageView = {
         $0.isUserInteractionEnabled = true
@@ -150,6 +150,38 @@ extension BaseAuthView {
     }
 }
 
+//MARK: - Setup Keyboard
+extension BaseAuthView {
+    func keyboardObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        view.frame.origin.y = 0
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            view.frame.origin.y -= (keyboardSize.height / 2)
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        view.frame.origin.y = 0
+    }
+    
+    @objc(gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:) func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    func swipeAction() {
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.hideKeyboardOnSwipeDown))
+        swipeDown.delegate = self
+        swipeDown.direction =  UISwipeGestureRecognizer.Direction.down
+        self.view.addGestureRecognizer(swipeDown)
+    }
+    
+    @objc func hideKeyboardOnSwipeDown() {
+        view.endEditing(true)
+    }
+}
 //#Preview() {
 //    BaseAuthClass()
 //}

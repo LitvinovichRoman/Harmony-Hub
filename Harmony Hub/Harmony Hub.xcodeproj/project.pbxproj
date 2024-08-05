@@ -12,7 +12,6 @@
 		62212D1A2C526CEA0083C4E8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 62212D192C526CEA0083C4E8 /* Kingfisher */; };
 		62212D1D2C526D3E0083C4E8 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 62212D1C2C526D3E0083C4E8 /* GoogleSignIn */; };
 		62212D1F2C526D3E0083C4E8 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62212D1E2C526D3E0083C4E8 /* GoogleSignInSwift */; };
-		62212D212C526FFC0083C4E8 /* AuthKeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62212D202C526FFC0083C4E8 /* AuthKeyboardManager.swift */; };
 		62212D232C52700B0083C4E8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62212D222C52700B0083C4E8 /* FirebaseManager.swift */; };
 		6237E2782C1896AD00F3CE36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6237E2772C1896AD00F3CE36 /* AppDelegate.swift */; };
 		6237E27A2C1896AD00F3CE36 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6237E2792C1896AD00F3CE36 /* SceneDelegate.swift */; };
@@ -66,7 +65,6 @@
 /* Begin PBXFileReference section */
 		62212D122C5267E70083C4E8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		62212D142C526A6F0083C4E8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		62212D202C526FFC0083C4E8 /* AuthKeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthKeyboardManager.swift; sourceTree = "<group>"; };
 		62212D222C52700B0083C4E8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		6237E2742C1896AD00F3CE36 /* Harmony Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Harmony Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6237E2772C1896AD00F3CE36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -648,7 +646,6 @@
 		62F6FE552C46D0780084AC00 /* Mangers */ = {
 			isa = PBXGroup;
 			children = (
-				62212D202C526FFC0083C4E8 /* AuthKeyboardManager.swift */,
 				62212D222C52700B0083C4E8 /* FirebaseManager.swift */,
 			);
 			path = Mangers;
@@ -762,7 +759,6 @@
 				6254D2D52C243E2500717A9A /* Resources.swift in Sources */,
 				62212D232C52700B0083C4E8 /* FirebaseManager.swift in Sources */,
 				62599F912C5B90F600DE28C8 /* UIImageView.ext.swift in Sources */,
-				62212D212C526FFC0083C4E8 /* AuthKeyboardManager.swift in Sources */,
 				623A40D62C415CD000FB63C5 /* RegistraionView.swift in Sources */,
 				62599FAA2C5BD49800DE28C8 /* TabView.swift in Sources */,
 				62F6FE4C2C46B3F00084AC00 /* NSNotification.Name.ext.swift in Sources */,
