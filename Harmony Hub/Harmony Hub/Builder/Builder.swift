@@ -26,12 +26,22 @@ class Builder {
         let view = TabBarView()
         let presenter = TabBarPresenter(view: view)
         view.presenter = presenter
-        return view
+       return view
     }
     
     static func getMainView() -> UIViewController {
         let view = MainView()
-        let presenter = MainViewPresenter(view: view)
+        let model = MainModel()
+        let presenter = MainViewPresenter(view: view, model: model)
+        view.presenter = presenter
+        return view
+    }
+    
+    static func getCategoryDetailView(categoryIndex: Int) -> UIViewController {
+        let view = CategoryDetailView()
+        let model = CategoryDetailModel()
+        model.categoryIndex = categoryIndex
+        let presenter = CategoryDetailViewPresenter(view: view, model: model)
         view.presenter = presenter
         return view
     }
