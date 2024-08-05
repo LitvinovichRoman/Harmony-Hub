@@ -12,6 +12,7 @@
 "profile" = "profile";
 "dayAdvice" = "Daily advice";
 "category" = "Category";
+"greetings" = "Greetings,";
 "moreButtonTitle" = "More";
 "categoryTitle" = "Select a category";
 "posesTitle" = "Select a pose";

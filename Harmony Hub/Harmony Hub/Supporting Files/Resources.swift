@@ -7,95 +7,104 @@
 
 import UIKit
 
+
 enum Resources {
     //MARK: -- Resources[Strings]
     enum Strings {
         enum TabBar {
-            static var main: String = .localize("main")
-            static var breath: String = .localize("breath")
-            static var thoughts: String = .localize("thoughts")
-            static var profile: String = .localize("profile")
+            static let main: String = .localize("main")
+            static let breath: String = .localize("breath")
+            static let thoughts: String = .localize("thoughts")
+            static let profile: String = .localize("profile")
         }
         
         enum MainScreen {
-            static var dayAdvice: String = .localize("dayAdvice")
-            static var category: String = .localize("category")
-            static var moreButtonTitle: String = .localize("moreButtonTitle")
-            static var categoryTitle: String = .localize("categoryTitle")
-            static var posesTitle: String = .localize("posesTitle")
-            static var poseScreenTittle: String = .localize("poseScreenTittle")
+            static let dayAdvice: String = .localize("dayAdvice")
+            static let category: String = .localize("category")
+            static let greetings: String = .localize("greetings")
+            static let moreButtonTitle: String = .localize("moreButtonTitle")
+            static let categoryTitle: String = .localize("categoryTitle")
+            static let posesTitle: String = .localize("posesTitle")
+            static let poseScreenTittle: String = .localize("poseScreenTittle")
         }
         
         enum Auth {
-            static var registrationTitle: String = .localize("registrationTitle")
-            static var loginTitle: String = .localize("loginTitle")
-            static var namePlaceholder: String = .localize("namePlaceholder")
-            static var emailPlaceholder: String = .localize("emailPlaceholder")
-            static var passPlaceholder: String = .localize("passPlaceholder")
-            static var regButtonTitle: String = .localize("regButtonTitle")
-            static var logButtonTitle: String = .localize("logButtonTitle")
+            static let registrationTitle: String = .localize("registrationTitle")
+            static let loginTitle: String = .localize("loginTitle")
+            static let namePlaceholder: String = .localize("namePlaceholder")
+            static let emailPlaceholder: String = .localize("emailPlaceholder")
+            static let passPlaceholder: String = .localize("passPlaceholder")
+            static let regButtonTitle: String = .localize("regButtonTitle")
+            static let logButtonTitle: String = .localize("logButtonTitle")
         }
         
         enum ThoughtsScreen {
-            static var thoughtsScreenTitle: String = .localize("thoughtsScreenTitle")
-            static var addButtonTitle: String = .localize("addButtonTitle")
+            static let thoughtsScreenTitle: String = .localize("thoughtsScreenTitle")
+            static let addButtonTitle: String = .localize("addButtonTitle")
         }
         
         enum BreathScreen {
-            static var breathScreenTitle: String = .localize("breathScreenTitle")
-            static var startButtonTitle: String = .localize("startButtonTitle")
-            static var stopButtonTitle: String = .localize("stopButtonTitle")
+            static let breathScreenTitle: String = .localize("breathScreenTitle")
+            static let startButtonTitle: String = .localize("startButtonTitle")
+            static let stopButtonTitle: String = .localize("stopButtonTitle")
         }
         
         enum ProfileScreen {
-            static var logo: String = .localize("logo") }
-        static var logoutButtonTitle: String = .localize("logoutButtonTitle")
-        static var projectInfoButtonTitle: String = .localize("projectInfoButtonTitle")
+            static let logo: String = .localize("logo")
+            static let logoutButtonTitle: String = .localize("logoutButtonTitle")
+            static let projectInfoButtonTitle: String = .localize("projectInfoButtonTitle")
+        }
     }
     
     //MARK: -- Resources[Backgrounds]
     enum Backgrounds {
-        static var main = #imageLiteral(resourceName: "mainBg")
-        static var breath = #imageLiteral(resourceName: "breathBg")
-        static var thoughts = #imageLiteral(resourceName: "thoughtsBg")
-        static var profile = #imageLiteral(resourceName: "profileBg")
-        static var login = #imageLiteral(resourceName: "loginViewBg")
-        static var registration = #imageLiteral(resourceName: "registrationViewBg")
+        static let main = #imageLiteral(resourceName: "mainBg")
+        static let breath = #imageLiteral(resourceName: "breathBg")
+        static let thoughts = #imageLiteral(resourceName: "thoughtsBg")
+        static let profile = #imageLiteral(resourceName: "profileBg")
+        static let login = #imageLiteral(resourceName: "loginViewBg")
+        static let registration = #imageLiteral(resourceName: "registrationViewBg")
     }
     
     //MARK: -- Resources[Icons]
     enum Icons {
         enum TabBar {
-            static var main = #imageLiteral(resourceName: "mainTab")
-            static var breath = #imageLiteral(resourceName: "breathTab")
-            static var thoughts = #imageLiteral(resourceName: "breathTab")
-            static var profile = #imageLiteral(resourceName: "profileTab")
+            static let main = #imageLiteral(resourceName: "mainTab")
+            static let breath = #imageLiteral(resourceName: "breathTab")
+            static let thoughts = #imageLiteral(resourceName: "breathTab")
+            static let profile = #imageLiteral(resourceName: "profileTab")
         }
         
         enum Thoughts {
-            static var newThought = #imageLiteral(resourceName: "newThought")
+            static let newThought = #imageLiteral(resourceName: "newThought")
         }
         
         enum Auth {
-            static var googleButton = #imageLiteral(resourceName: "googleButton")
+            static let googleButton = #imageLiteral(resourceName: "googleButton")
         }
     }
     
     //MARK: -- Resources[Colors]
     enum Colors {
+        enum App {
+            static let borderColor = #colorLiteral(red: 0.631372549, green: 0.4666666667, blue: 0.4431372549, alpha: 1)
+            static let accent = #colorLiteral(red: 0.8588235294, green: 0.8509803922, blue: 0.7960784314, alpha: 1)
+            static let subBackgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            static let textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        }
+        
         enum TabBar {
-            static var active = #colorLiteral(red: 0.631372549, green: 0.4666666667, blue: 0.4431372549, alpha: 1)
-            static var inactive = #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
-            static var barBackgroundColor = #colorLiteral(red: 0.9142437178, green: 0.9142437178, blue: 0.9142437178, alpha: 1)
+            static let active = #colorLiteral(red: 0.8659283669, green: 0.8659283669, blue: 0.8659283669, alpha: 1)
+            static let inactive: UIColor = .clear
         }
         
         enum Auth {
-            static var titleLabelColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            static var bottomButtonTitleColor = #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
-            static var textFieldBackgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            static var textFieldTextColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            static var mainButtonBackgroundColor = #colorLiteral(red: 0.631372549, green: 0.4666666667, blue: 0.4431372549, alpha: 1)
-            static var mainButtonTitleColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            static let titleLabelColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            static let bottomButtonTitleColor = #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
+            static let textFieldBackgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            static let textFieldTextColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            static let mainButtonBackgroundColor = #colorLiteral(red: 0.631372549, green: 0.4666666667, blue: 0.4431372549, alpha: 1)
+            static let mainButtonTitleColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
     }
 }

@@ -11,7 +11,7 @@ protocol LoginViewProtocol: AnyObject {
     func navigateToLoginView()
 }
 
-class LoginView: BaseAuthClass {
+class LoginView: BaseAuthView {
     //MARK: -- Presenter
     var presenter: LoginViewPresenterProtocol!
     
@@ -51,6 +51,6 @@ extension LoginView: LoginViewProtocol {
     }
 }
 
-#Preview() {
-    LoginView()
-}
+//#Preview() {
+//    LoginView()
+//}

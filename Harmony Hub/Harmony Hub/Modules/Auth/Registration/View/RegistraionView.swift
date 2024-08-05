@@ -11,7 +11,7 @@ protocol RegistrationViewProtocol: AnyObject {
     func navigateToLoginView()
 }
 
-class RegistrationView: BaseAuthClass {
+class RegistrationView: BaseAuthView {
     //MARK: -- Presenter
     var presenter: RegistrationViewPresenterProtocol!
     
