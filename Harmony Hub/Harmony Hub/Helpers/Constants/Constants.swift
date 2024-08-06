@@ -15,6 +15,27 @@ enum CollectionCellConstants {
     static let sectionInset: UIEdgeInsets = .init(top: 16, left: 16, bottom: 16, right: 16)
 }
 
+//MARK: -- ThoughtCellConstants
+enum ThoughtCellConstants {
+    static let cornerRadius: CGFloat = 25
+    static let backgroundColor: UIColor = .white.withAlphaComponent(0.4)
+    static let titleLabelFont: UIFont = .boldSystemFont(ofSize: 16)
+    static let messageTextLabelFont: UIFont = .systemFont(ofSize: 14)
+    static let dateLabelFont: UIFont = .systemFont(ofSize: 10)
+    static let messageTextLabelFumberOfLines: Int = 0
+    static let topAnchor: CGFloat = 4
+    static let leadingAnchor: CGFloat = 16
+    static let trailingAnchor: CGFloat = -16
+    static let dateLabelBottomAnchor: CGFloat = -4
+}
+
+//MARK: -- ThoughtsViewConstants
+enum ThoughtsViewConstants {
+    static let cellIdentifier: String = "ThoughtCell"
+    static let dateFormat: String = "dd.MM.yyyy HH:mm"
+    static let tableViewBottomAnchor: CGFloat = -100
+}
+
 //MARK: -- MainViewConstants
 enum MainViewConstants {
     static let labelsFont: UIFont = .systemFont(ofSize: 20, weight: .bold)
