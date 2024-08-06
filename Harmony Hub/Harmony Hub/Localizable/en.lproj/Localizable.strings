@@ -13,6 +13,7 @@
 "dayAdvice" = "Daily advice";
 "category" = "Category";
 "greetings" = "Greetings,";
+"tipOfTheDayText" = "Tip of the day";
 "moreButtonTitle" = "More";
 "categoryTitle" = "Select a category";
 "posesTitle" = "Select a pose";
@@ -24,7 +25,6 @@
 "passPlaceholder" = "Enter password";
 "regButtonTitle" = "Register";
 "logButtonTitle" = "Login";
-"thoughtsScreenTitle" = "Your thoughts";
 "addButtonTitle" = "Record a thought";
 "breathScreenTitle" = "Breath control";
 "startButtonTitle" = "Start";
@@ -32,3 +32,10 @@
 "logo" = "Harmony Hub";
 "logoutButtonTitle" = "Log out of profile";
 "projectInfoButtonTitle" = "About the project";
+"thoughtsScreenTitle" = "Your thoughts";
+"titleFieldPlaceholder" = "Theme";
+"textFieldPlaceholder" = "Thought";
+"thoughtsAlertTitle" = "Share your thoughts";
+"thoughtsCancelAction" = "Cancel";
+"thoughtsSaveAction" = "Save";
+

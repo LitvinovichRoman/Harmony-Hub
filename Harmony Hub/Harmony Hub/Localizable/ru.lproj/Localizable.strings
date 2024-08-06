@@ -13,6 +13,7 @@
 "dayAdvice" = "Совет дня";
 "category" = "Категори";
 "greetings" = "Приветствуем,";
+"tipOfTheDayText" = "Совет дня";
 "moreButtonTitle" = "Еще";
 "categoryTitle" = "Выберите категорию";
 "posesTitle" = "Выберите позу";
@@ -22,9 +23,6 @@
 "namePlaceholder" = "Введите имя";
 "emailPlaceholder" = "Введите email";
 "passPlaceholder" = "Введите пароль";
-"regButtonTitle" = "Зарегистрироваться";
-"logButtonTitle" = "Войти";
-"thoughtsScreenTitle" = "Твои мысли";
 "addButtonTitle" = "Записать мысль";
 "breathScreenTitle" = "Контроль дыхания";
 "startButtonTitle" = "Начать";
@@ -32,3 +30,12 @@
 "logo" = "Harmony Hub";
 "logoutButtonTitle" = "Выйти из профиля";
 "projectInfoButtonTitle" = "О проекте";
+"thoughtsScreenTitle" = "Ваши мысли";
+"titleFieldPlaceholder" = "Тема";
+"textFieldPlaceholder" = "Мысль";
+"thoughtsAlertTitle" = "Поделитесь мыслями";
+"thoughtsCancelAction" = "Отмена";
+"thoughtsSaveAction" = "Сохранить";
+"regButtonTitle" = "Зарегистрироваться";
+"logButtonTitle" = "Войти";
+

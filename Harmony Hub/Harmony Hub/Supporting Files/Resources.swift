@@ -22,6 +22,7 @@ enum Resources {
             static let dayAdvice: String = .localize("dayAdvice")
             static let category: String = .localize("category")
             static let greetings: String = .localize("greetings")
+            static let tipOfTheDayText: String = .localize("tipOfTheDayText")
             static let moreButtonTitle: String = .localize("moreButtonTitle")
             static let categoryTitle: String = .localize("categoryTitle")
             static let posesTitle: String = .localize("posesTitle")
@@ -41,6 +42,11 @@ enum Resources {
         enum ThoughtsScreen {
             static let thoughtsScreenTitle: String = .localize("thoughtsScreenTitle")
             static let addButtonTitle: String = .localize("addButtonTitle")
+            static let titleFieldPlaceholder: String = .localize("titleFieldPlaceholder")
+            static let textFieldPlaceholder: String = .localize("textFieldPlaceholder")
+            static let thoughtsAlertTitle: String = .localize("thoughtsAlertTitle")
+            static let thoughtsCancelAction: String = .localize("thoughtsCancelAction")
+            static let thoughtsSaveAction: String = .localize("thoughtsSaveAction")
         }
         
         enum BreathScreen {
@@ -71,7 +77,7 @@ enum Resources {
         enum TabBar {
             static let main = #imageLiteral(resourceName: "mainTab")
             static let breath = #imageLiteral(resourceName: "breathTab")
-            static let thoughts = #imageLiteral(resourceName: "breathTab")
+            static let thoughts = #imageLiteral(resourceName: "thoughtsTab")
             static let profile = #imageLiteral(resourceName: "profileTab")
         }
         
