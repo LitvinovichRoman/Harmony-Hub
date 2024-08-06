@@ -19,10 +19,10 @@ class TabView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = TabViewConstant.backgroundColor
-        layer.borderColor = TabViewConstant.borderColor
-        layer.borderWidth = TabViewConstant.borderWidth
-        layer.cornerRadius = TabViewConstant.cornerRadius
+        backgroundColor = TabViewConstants.backgroundColor
+        layer.borderColor = TabViewConstants.borderColor
+        layer.borderWidth = TabViewConstants.borderWidth
+        layer.cornerRadius = TabViewConstants.cornerRadius
         clipsToBounds = true
 
     }

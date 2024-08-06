@@ -16,13 +16,13 @@ class TabBarItem: UIView {
         willSet  {
             self.imageRightConstraints?.isActive = !newValue
             self.contentView.backgroundColor = newValue ? Resources.Colors.TabBar.active: Resources.Colors.TabBar.inactive
-            UIView.animate(withDuration: TabBarItemConstant.animateDuration) { self.layoutIfNeeded() } } }
+            UIView.animate(withDuration: TabBarItemConstants.animateDuration) { self.layoutIfNeeded() } } }
     
     //MARK: -- Properties[Lazy]
     lazy var contentView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = isActive ? Resources.Colors.TabBar.active: Resources.Colors.TabBar.inactive
-        $0.layer.cornerRadius = TabBarItemConstant.cornerRadius
+        $0.layer.cornerRadius = TabBarItemConstants.cornerRadius
         $0.addSubviews(tabImage, tabText)
         $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToTab)))
         return $0
@@ -31,8 +31,8 @@ class TabBarItem: UIView {
     lazy var tabImage: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.image = tabItem.tabImage
-        $0.heightAnchor.constraint(equalToConstant: TabBarItemConstant.tabImageHeightAnchor).isActive = true
-        $0.widthAnchor.constraint(equalToConstant: TabBarItemConstant.tabImageWidthAnchor).isActive = true
+        $0.heightAnchor.constraint(equalToConstant: TabBarItemConstants.tabImageHeightAnchor).isActive = true
+        $0.widthAnchor.constraint(equalToConstant: TabBarItemConstants.tabImageWidthAnchor).isActive = true
         return $0
     }(UIImageView())
     
@@ -69,7 +69,7 @@ extension TabBarItem {
     private func configureLayout() {
         addSubviews(contentView)
         
-        imageRightConstraints = tabImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  TabBarItemConstant.newImageRightConstraints)
+        imageRightConstraints = tabImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  TabBarItemConstants.newImageRightConstraints)
         imageRightConstraints?.isActive = !isActive
         
         makeContentViewConstarint()
@@ -88,16 +88,16 @@ extension TabBarItem {
     
     private func makeTabImageConstarint() {
         NSLayoutConstraint.activate([
-            tabImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: TabBarItemConstant.tabImageTopAnchor),
-            tabImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: TabBarItemConstant.tabImageLeadingAnchor),
-            tabImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: TabBarItemConstant.tabImageBottomAnchor),
+            tabImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: TabBarItemConstants.tabImageTopAnchor),
+            tabImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: TabBarItemConstants.tabImageLeadingAnchor),
+            tabImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: TabBarItemConstants.tabImageBottomAnchor),
         ])
     }
     
     private func makeTabTextConstarint() {
         NSLayoutConstraint.activate([
-            tabText.leadingAnchor.constraint(equalTo: tabImage.trailingAnchor, constant: TabBarItemConstant.tabTextLeadingAnchor),
-            tabText.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: TabBarItemConstant.tabTextTrailingAnchor),
+            tabText.leadingAnchor.constraint(equalTo: tabImage.trailingAnchor, constant: TabBarItemConstants.tabTextLeadingAnchor),
+            tabText.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: TabBarItemConstants.tabTextTrailingAnchor),
             tabText.centerYAnchor.constraint(equalTo: tabImage.centerYAnchor)
         ])
     }

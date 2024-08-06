@@ -63,7 +63,7 @@ class CategoryDetailView: BaseAppView, CategoryDetailViewProtocol {
     //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.tintColor = .black
+        title = Resources.Strings.MainScreen.poseScreenTittle
         configureBackground(with: Resources.Backgrounds.main)
         presenter.loadImageURLs()
         configureLayout ()

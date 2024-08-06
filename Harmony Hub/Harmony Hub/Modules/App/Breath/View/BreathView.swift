@@ -23,6 +23,7 @@ class BreathView: BaseAppView, BreathViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackground(with: Resources.Backgrounds.breath)
+        title = Resources.Strings.BreathScreen.breathScreenTitle
     }
 }
 
@@ -31,7 +32,3 @@ private extension BreathView {
 
 }
 
-
-#Preview() {
-    BreathView()
-}

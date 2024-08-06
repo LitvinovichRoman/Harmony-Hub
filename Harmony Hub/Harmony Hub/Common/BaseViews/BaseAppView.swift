@@ -17,6 +17,7 @@ class BaseAppView: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.tintColor = .black
     }
 }
 

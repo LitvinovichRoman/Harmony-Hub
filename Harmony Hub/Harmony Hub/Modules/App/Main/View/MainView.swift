@@ -23,7 +23,7 @@ class MainView: BaseAppView, MainViewProtocol {
     
     //MARK: - Properties[lazy labels]
     lazy  var topLabel: UILabel = {
-        $0.text = Resources.Strings.MainScreen.greetings + " \(name)!"
+        $0.text = Resources.Strings.MainScreen.tipOfTheDayText
         $0.textColor = Resources.Colors.App.textColor
         $0.font = MainViewConstants.labelsFont
         $0.textAlignment = .left
@@ -70,7 +70,7 @@ class MainView: BaseAppView, MainViewProtocol {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.tintColor = .black
+        title = Resources.Strings.MainScreen.greetings + " \(name)!"
         configureBackground(with: Resources.Backgrounds.main)
         presenter.loadImageURLs()
         presenter.showDailyTip()
@@ -152,7 +152,3 @@ extension MainView {
     
 }
 
-
-#Preview() {
-    MainView()
-}
