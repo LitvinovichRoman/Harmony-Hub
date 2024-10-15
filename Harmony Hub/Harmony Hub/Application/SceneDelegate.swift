@@ -7,14 +7,14 @@
 
 import UIKit
 
-enum WindowManager {
+enum StateCase{
     case login
-    case registration
-    case app
+    case reg
+    case main
 }
 
-enum UserInfoKeys: String {
-    case state
+enum Keys: String {
+    case viewController
 }
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -22,29 +22,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        NotificationCenter.default.addObserver(self, selector: #selector(windowManager(notification: )),
-                                               name: .windowManager, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setRootViewController(notification: )),
+                                               name: .setRootViewController, object: nil)
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let tabBarController = Builder.getTabBar()
-        window?.rootViewController = tabBarController
+        window?.rootViewController = windowManager(viewController: .main)
         window?.makeKeyAndVisible()
     }
     
-    @objc
-    private func windowManager(notification: Notification) {
-        guard let userInfo = notification.userInfo as? [String: Any] else { return }
-        guard let state = userInfo[.state] as? WindowManager else { return }
-        
-        switch state {
+    private func windowManager(viewController: StateCase) -> UIViewController {
+        switch viewController {
         case .login:
-            window?.rootViewController = Builder.getLoginView()
-        case .registration:
-            window?.rootViewController = Builder.getRegistrationView()
-        case .app:
-            window?.rootViewController = Builder.getTabBar()
+            return Builder.getLoginView()
+        case .reg:
+            return Builder.getRegistrationView()
+        case .main:
+            return Builder.getTabBar()
         }
+    }
+    
+    @objc private func setRootViewController(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let viewController = userInfo[Keys.viewController] as? StateCase else { return }
+        self.window?.rootViewController = windowManager(viewController: viewController)
     }
     
 }

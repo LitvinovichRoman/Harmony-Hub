@@ -8,6 +8,6 @@
 import Foundation
 
 extension Notification.Name {
-    static let windowManager = Notification.Name("windowManager")
     static let thoughtsUpdated = Notification.Name("thoughtsUpdated")
+    static let setRootViewController = Notification.Name("setRootViewController")
 }
