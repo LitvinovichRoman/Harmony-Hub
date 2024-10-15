@@ -6,41 +6,22 @@
 //
 
 import UIKit
-//MARK: -- LoginViewProtocol
+//MARK: -  LoginView Protocol
 protocol LoginViewProtocol: AnyObject {
     func navigateToLoginView()
 }
 
-class LoginView: BaseAuthView {
+// MARK: - Final Class LoginView
+final class LoginView: BaseAuthView, Backgroundable, LoginViewProtocol {
     //MARK: -- Presenter
     var presenter: LoginViewPresenterProtocol!
     
     //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        makeBackground(image: Resources.Backgrounds.registration)
+        initialize()
         setActions()
-    }
-}
-
-//MARK: -- SetUp UI
-extension LoginView: LoginViewProtocol {
-    private func setupUI() {
-        configureBackground(with: Resources.Backgrounds.registration)
-        removeUponLogin(true)
-        titleLabel.text = Resources.Strings.Auth.loginTitle
-        usernameTextField.placeholder = Resources.Strings.Auth.namePlaceholder
-        emailTextField.placeholder = Resources.Strings.Auth.emailPlaceholder
-        passwordTextField.placeholder = Resources.Strings.Auth.passPlaceholder
-        mainButton.setTitle(Resources.Strings.Auth.logButtonTitle, for: .normal)
-        bottomButton.setTitle(Resources.Strings.Auth.regButtonTitle, for: .normal)
-    }
-    
-    private func setActions() {
-        presenter = LoginViewPresenter(view: self)
-        
-        mainButton.completion = { self.presenter.didTapMainButton() }
-        bottomButton.completion = { self.presenter.didTapBottomButton() }
     }
     
     func navigateToLoginView() {
@@ -51,6 +32,26 @@ extension LoginView: LoginViewProtocol {
     }
 }
 
-//#Preview() {
-//    LoginView()
-//}
+//MARK: - Configure
+private extension LoginView {
+    func initialize() {
+        removeUponLogin(true)
+        titleLabel.text = Resources.Strings.Auth.loginTitle
+        usernameTextField.placeholder = Resources.Strings.Auth.namePlaceholder
+        emailTextField.placeholder = Resources.Strings.Auth.emailPlaceholder
+        passwordTextField.placeholder = Resources.Strings.Auth.passPlaceholder
+        mainButton.setTitle(Resources.Strings.Auth.logButtonTitle, for: .normal)
+        bottomButton.setTitle(Resources.Strings.Auth.regButtonTitle, for: .normal)
+    }
+    
+    func setActions() {
+        presenter = LoginViewPresenter(view: self)
+        mainButton.action = { [ weak self ] in
+            self?.presenter.didTapMainButton()
+        }
+        
+        bottomButton.action = { [ weak self ] in
+            self?.presenter.didTapBottomButton()
+        }
+    }
+}

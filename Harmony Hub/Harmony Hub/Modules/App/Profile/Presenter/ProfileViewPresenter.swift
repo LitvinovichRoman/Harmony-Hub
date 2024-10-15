@@ -6,12 +6,13 @@
 //
 
 import UIKit
-
+// MARK: - ProfileViewPresenter Protocol
 protocol ProfileViewPresenterProtocol: AnyObject {
     init(view: ProfileViewProtocol)
 }
 
-class ProfileViewPresenter: ProfileViewPresenterProtocol {
+// MARK: - Final class ProfileViewPresenter
+final class ProfileViewPresenter: ProfileViewPresenterProtocol {
     weak var view: ProfileViewProtocol?
     
     required init(view: any ProfileViewProtocol) {

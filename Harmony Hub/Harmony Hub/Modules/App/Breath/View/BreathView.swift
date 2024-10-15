@@ -7,28 +7,31 @@
 
 import UIKit
 
+// MARK: - BreathView Protocol
 protocol BreathViewProtocol: AnyObject {
     
 }
 
-class BreathView: BaseAppView, BreathViewProtocol {
+// MARK: - Final Class BreathView
+final class BreathView: UIViewController, Backgroundable, BreathViewProtocol {
     //MARK: - Presenter
     var presenter: BreathViewPresenterProtocol!
     
     
     //MARK: - Properties
-   
-
+    
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackground(with: Resources.Backgrounds.breath)
-        title = Resources.Strings.BreathScreen.breathScreenTitle
+        makeBackground(image: Resources.Backgrounds.breath)
     }
 }
 
-//MARK: - Configure layout
+//MARK: - Configure
 private extension BreathView {
-
+    func configure() {
+        title = Resources.Strings.BreathScreen.breathScreenTitle
+    }
 }
 

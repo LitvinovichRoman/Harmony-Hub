@@ -7,7 +7,7 @@
 
 import UIKit
 
-//MARK: -- PresenterProtocol
+//MARK: - Presenter Protocol
 protocol RegistrationViewPresenterProtocol: AnyObject {
     func didUpdateUsernameTextField()
     func didUpdateEmailTextField()
@@ -16,7 +16,8 @@ protocol RegistrationViewPresenterProtocol: AnyObject {
     func didTapMainButton()
 }
 
-class RegistrationViewPresenter {
+// MARK: - Final Calass RegistrationViewPresenter
+final class RegistrationViewPresenter {
     weak var view: RegistrationViewProtocol?
     
     required init(view: RegistrationViewProtocol) {
@@ -24,9 +25,8 @@ class RegistrationViewPresenter {
     }
 }
 
-//MARK: -- Protocol Methods
+//MARK: - Protocol Methods
 extension RegistrationViewPresenter: RegistrationViewPresenterProtocol  {
-    
     func didUpdateUsernameTextField() {
         //logic for updating username text field
     }

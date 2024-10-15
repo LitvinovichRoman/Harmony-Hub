@@ -6,40 +6,22 @@
 //
 
 import UIKit
-//MARK: -- RegistrationViewProtocol
+
+//MARK: - RegistrationView Protocol
 protocol RegistrationViewProtocol: AnyObject {
     func navigateToLoginView()
 }
 
-class RegistrationView: BaseAuthView {
-    //MARK: -- Presenter
+// MARK: - Final Class RegistrationView
+final class RegistrationView: BaseAuthView, RegistrationViewProtocol, Backgroundable {
     var presenter: RegistrationViewPresenterProtocol!
     
     //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        makeBackground(image: Resources.Backgrounds.registration)
+        initialize()
         setActions()
-    }
-}
-
-//MARK: -- SetUp UI
-extension RegistrationView: RegistrationViewProtocol {
-    private func setupUI() {
-        configureBackground(with: Resources.Backgrounds.registration)
-        titleLabel.text = Resources.Strings.Auth.loginTitle
-        usernameTextField.placeholder = Resources.Strings.Auth.namePlaceholder
-        emailTextField.placeholder = Resources.Strings.Auth.emailPlaceholder
-        passwordTextField.placeholder = Resources.Strings.Auth.passPlaceholder
-        mainButton.setTitle(Resources.Strings.Auth.regButtonTitle, for: .normal)
-        bottomButton.setTitle(Resources.Strings.Auth.logButtonTitle, for: .normal)
-    }
-    
-    private func setActions() {
-        presenter = RegistrationViewPresenter(view: self)
-        
-        mainButton.completion = { self.presenter.didTapMainButton() }
-        bottomButton.completion = { self.presenter.didTapBottomButton() }
     }
     
     func navigateToLoginView() {
@@ -48,8 +30,22 @@ extension RegistrationView: RegistrationViewProtocol {
         loginView.modalTransitionStyle = .partialCurl
         self.present(loginView, animated: true)
     }
-    
 }
-#Preview() {
-    RegistrationView()
+
+//MARK: - Configure
+private extension RegistrationView  {
+    func initialize() {
+        titleLabel.text = Resources.Strings.Auth.loginTitle
+        usernameTextField.placeholder = Resources.Strings.Auth.namePlaceholder
+        emailTextField.placeholder = Resources.Strings.Auth.emailPlaceholder
+        passwordTextField.placeholder = Resources.Strings.Auth.passPlaceholder
+        mainButton.setTitle(Resources.Strings.Auth.regButtonTitle, for: .normal)
+        bottomButton.setTitle(Resources.Strings.Auth.logButtonTitle, for: .normal)
+    }
+    
+    func setActions() {
+        presenter = RegistrationViewPresenter(view: self)
+        mainButton.action = { self.presenter.didTapMainButton() }
+        bottomButton.action = { self.presenter.didTapBottomButton() }
+    }
 }

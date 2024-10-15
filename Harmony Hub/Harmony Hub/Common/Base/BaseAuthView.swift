@@ -21,24 +21,21 @@ protocol RegistraionViewDelegate {
 
 // MARK: - BaseAuthClass
 class BaseAuthView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
-    //MARK: -- Properties [lazy]
+    //MARK: -- Properties
     private lazy var contentImage: UIImageView = {
         $0.isUserInteractionEnabled = true
         return $0
     }(UIImageView())
     
-    
-    lazy var titleLabel: UILabel = {
+    var titleLabel: UILabel = {
         $0.text = ""
         $0.textAlignment = .left
         $0.textColor = Resources.Colors.Auth.titleLabelColor
         $0.font = BaseAuthClassConstants.titleFont
         return $0
     }(UILabel())
-    
-    
-    
-    lazy var googleTitleLabel: UILabel = {
+            
+    var googleTitleLabel: UILabel = {
         return $0
     }(UILabel())
     
@@ -77,7 +74,7 @@ class BaseAuthView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
 
 
 //MARK: - Configure
-extension BaseAuthView {
+private extension BaseAuthView {
     //MARK: -- Configure Background
     func configureBackground(with image: UIImage) {
         view.addSubviews(contentImage)
@@ -171,6 +168,7 @@ extension BaseAuthView {
     @objc(gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:) func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+    
     func swipeAction() {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.hideKeyboardOnSwipeDown))
         swipeDown.delegate = self
@@ -182,6 +180,19 @@ extension BaseAuthView {
         view.endEditing(true)
     }
 }
-//#Preview() {
-//    BaseAuthClass()
-//}
+
+//MARK: - BaseAuthClassConstants
+enum BaseAuthClassConstants {
+    static let titleFont: UIFont = .systemFont(ofSize: 24, weight: .bold)
+    static let titleLabelTopAnchor: CGFloat = 200
+    static let titleLabelLeadingAnchor: CGFloat = 5
+    static let titleLabelTrailingAnchor: CGFloat = -5
+    static let textFieldsHeight: CGFloat = 50
+    static let buttonsStackSpacing: CGFloat = 50
+    static let buttonsHeight: CGFloat = 50
+    static let textFieldStackSpacing: CGFloat = 20.0
+    static let textFieldsStackViewTopAnchor: CGFloat = 50
+    static let buttonsStackViewTopAnchor: CGFloat = 30
+    static let textFieldsStackViewLeadingAnchor: CGFloat = 5
+    static let textFieldsStackViewTrailingAnchor: CGFloat = -5
+}

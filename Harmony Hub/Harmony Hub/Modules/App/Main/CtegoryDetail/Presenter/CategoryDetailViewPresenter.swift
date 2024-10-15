@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - CategotyDetailViewPresenter Protocol
 protocol CategotyDetailViewPresenterProtocol {
     init(view: CategoryDetailViewProtocol, model: CategoryDetailModelProtocol)
     var imageURLs: [URL] { get }
@@ -14,7 +15,8 @@ protocol CategotyDetailViewPresenterProtocol {
     func loadImageURLs()
 }
 
-class CategoryDetailViewPresenter: CategotyDetailViewPresenterProtocol {
+// MARK: - Final Class CategoryDetailViewPresenter
+final class CategoryDetailViewPresenter: CategotyDetailViewPresenterProtocol {
     weak var view: CategoryDetailViewProtocol?
     var model: CategoryDetailModelProtocol
     var imageURLs: [URL] = []
@@ -29,17 +31,17 @@ class CategoryDetailViewPresenter: CategotyDetailViewPresenterProtocol {
     }
     
     func loadImageURLs() {
-            guard let categoryDetailModel = model as? CategoryDetailModel else { return }
-            categoryDetailModel.fetchImageURLs(forCategoryAt: categoryDetailModel.categoryIndex) { [weak self] result in
-                switch result {
-                case .success(let urls):
-                    self?.imageURLs = urls.sorted(by: { $0.absoluteString < $1.absoluteString })
-                    DispatchQueue.main.async {
-                        self?.view?.collectionView.reloadData()
-                    }
-                case .failure(let error):
-                    print("Error fetching image URLs: \(error.localizedDescription)")
+        guard let categoryDetailModel = model as? CategoryDetailModel else { return }
+        categoryDetailModel.fetchImageURLs(forCategoryAt: categoryDetailModel.categoryIndex) { [weak self] result in
+            switch result {
+            case .success(let urls):
+                self?.imageURLs = urls.sorted(by: { $0.absoluteString < $1.absoluteString })
+                DispatchQueue.main.async {
+                    self?.view?.collectionView.reloadData()
                 }
+            case .failure(let error):
+                print("Error fetching image URLs: \(error.localizedDescription)")
             }
         }
+    }
 }

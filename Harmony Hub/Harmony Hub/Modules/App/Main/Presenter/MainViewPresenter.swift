@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - MainViewPresenter Protocol
 protocol MainViewPresenterProtocol {
     var imageURLs: [URL] { get }
     func imageURL(at index: Int) -> URL?
@@ -14,7 +15,9 @@ protocol MainViewPresenterProtocol {
     func showDailyTip()
 }
 
-class MainViewPresenter: MainViewPresenterProtocol {
+// MARK: - Final Class MainViewPresenter
+final class MainViewPresenter: MainViewPresenterProtocol {
+    // MARK: -- Properties
     weak var view: MainViewProtocol?
     var model: MainModelProtocol
     var imageURLs: [URL] = []
@@ -47,7 +50,7 @@ class MainViewPresenter: MainViewPresenterProtocol {
     }
     
     func imageURL(at index: Int) -> URL? {
-            guard index < imageURLs.count else { return nil }
-            return imageURLs[index]
-        }
+        guard index < imageURLs.count else { return nil }
+        return imageURLs[index]
+    }
 }

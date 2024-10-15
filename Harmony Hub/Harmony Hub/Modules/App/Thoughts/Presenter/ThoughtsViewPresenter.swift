@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - ThoughtsViewPresenter Protocol
 protocol ThoughtsViewPresenterProtocol: AnyObject {
     init(view: ThoughtsViewProtocol)
     var manager: CoreDataManager { get set }
@@ -14,9 +15,9 @@ protocol ThoughtsViewPresenterProtocol: AnyObject {
     func updateTableView() -> Void
 }
 
-class ThoughtsViewPresenter: ThoughtsViewPresenterProtocol {
+// MARK: - Final Class ThoughtsViewPresenter
+final class ThoughtsViewPresenter: ThoughtsViewPresenterProtocol {
     var manager = CoreDataManager.shared
-    
     weak var view: ThoughtsViewProtocol?
     
     required init(view: ThoughtsViewProtocol) {

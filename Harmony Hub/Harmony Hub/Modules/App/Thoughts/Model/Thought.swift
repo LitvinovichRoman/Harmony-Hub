@@ -13,10 +13,9 @@ import CoreData
 public class Thought: NSManagedObject {}
 
 extension Thought {
-    
     @nonobjc public class func fetchRequest() ->
     NSFetchRequest<Thought> {
-         return NSFetchRequest<Thought>(entityName: "Thought")
+        return NSFetchRequest<Thought>(entityName: "Thought")
     }
     
     @NSManaged public var id: String

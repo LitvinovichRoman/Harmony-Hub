@@ -7,7 +7,8 @@
 
 import UIKit
 
-class Builder {
+// MARK: - Final Class Builder
+final class Builder {
     static func getLoginView() -> UIViewController {
         let view = LoginView()
         let presenter = LoginViewPresenter(view: view)

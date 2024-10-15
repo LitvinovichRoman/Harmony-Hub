@@ -7,14 +7,15 @@
 
 import UIKit
 
+// MARK: - TabBarPresenter Protocol
 protocol TabBarPresenterProtocol {
     init(view: TabBarViewProtocol)
     func createTabItems() -> [TabItem]
 }
 
-class TabBarPresenter: TabBarPresenterProtocol {
+// MARK: - Final Class TabBarPresenter
+final class TabBarPresenter: TabBarPresenterProtocol {
     weak var view: TabBarViewProtocol?
-    
     var tabItems: [TabItem] = []
     
     required init(view: any TabBarViewProtocol) {
@@ -29,17 +30,15 @@ class TabBarPresenter: TabBarPresenterProtocol {
             TabItem(index: 2, tabText: Resources.Strings.TabBar.thoughts, tabImage: Resources.Icons.TabBar.thoughts),
             TabItem(index: 3, tabText: Resources.Strings.TabBar.profile, tabImage: Resources.Icons.TabBar.profile)
         ]
-
+        
         return tabItems
     }
-
+    
     func setupControllers() {
         let mainView = Builder.getMainView()
         let breathView = Builder.getBreathView()
         let thoughtsView = Builder.getThoughtsView()
         let profileView =  Builder.getProfileView()
-        
-      
         
         view?.setControllers(views: [
             UINavigationController(rootViewController: mainView),
@@ -47,7 +46,6 @@ class TabBarPresenter: TabBarPresenterProtocol {
             UINavigationController(rootViewController: thoughtsView),
             UINavigationController(rootViewController: profileView)])
     }
-    
 }
 
 

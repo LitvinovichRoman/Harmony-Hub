@@ -7,42 +7,43 @@
 
 import UIKit
 
-class ProgressView: UIView {
+// MARK: - Final Class ProgressView
+final class ProgressView: UIView {
+    // MARK: -- Properties
     private var greyColor: CGColor?
     private var bowColor: CGColor?
+    private var centerPoint: CGPoint?
+    private var circularPath: UIBezierPath?
+    
     private var lineWidth: CGFloat = 12
     private var radius: CGFloat = 150
     
     private let shapeLayer = CAShapeLayer()
     private let greyLayer = CAShapeLayer()
     
-    private var score: Int = 0 {
-        didSet {
-            updateProgress()
-        }
-    }
+    private var score: Int = 0 { didSet { updateProgress() } }
     
+    // MARK: -- Init Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
-    }
-    
-    private func setupView() {
-        layer.addSublayer(greyLayer)
-        layer.addSublayer(shapeLayer)
         configureLayers()
     }
     
-    private func configureLayers() {
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: .pi, endAngle: .pi * 2, clockwise: true)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - Configure
+private extension ProgressView {
+    func configureLayers() {
+        layer.addSublayer(greyLayer)
+        layer.addSublayer(shapeLayer)
         
-        greyLayer.path = circularPath.cgPath
+        centerPoint = CGPoint(x: bounds.midX, y: bounds.midY)
+        circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: .pi, endAngle: .pi * 2, clockwise: true)
+        
+        greyLayer.path = circularPath?.cgPath
         greyLayer.strokeColor = greyColor
         greyLayer.lineWidth = lineWidth
         greyLayer.lineCap = .round
@@ -52,7 +53,7 @@ class ProgressView: UIView {
         greyLayer.shadowOffset = .zero
         greyLayer.shadowRadius = 2
         
-        shapeLayer.path = circularPath.cgPath
+        shapeLayer.path = circularPath?.cgPath
         shapeLayer.strokeColor = bowColor
         shapeLayer.lineWidth = lineWidth
         shapeLayer.lineCap = .round
@@ -60,15 +61,18 @@ class ProgressView: UIView {
         shapeLayer.fillColor = UIColor.clear.cgColor
     }
     
-    private func updateProgress() {
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+    func updateProgress() {
+        centerPoint = CGPoint(x: bounds.midX, y: bounds.midY)
         let endAngle: CGFloat = .pi + (.pi * (CGFloat(score) / 100.0))
-        let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: .pi, endAngle: endAngle, clockwise: true)
+        circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: .pi, endAngle: endAngle, clockwise: true)
         
-        shapeLayer.path = circularPath.cgPath
+        shapeLayer.path = circularPath?.cgPath
         shapeLayer.strokeEnd = CGFloat(score) / 100.0
     }
-    
+}
+
+// MARK: - Set Methods
+extension ProgressView {
     func setProgress(to newScore: Int) {
         score = newScore
     }

@@ -7,11 +7,13 @@
 
 import UIKit
 
+// MARK: - BreathViewPresenter Protocol
 protocol BreathViewPresenterProtocol {
     init(view: BreathViewProtocol)
 }
 
-class BreathViewPresenter: BreathViewPresenterProtocol {
+// MARK: - Final Class BreathViewPresenter
+final class BreathViewPresenter: BreathViewPresenterProtocol {
     weak var view: BreathViewProtocol?
     
     required init(view: any BreathViewProtocol) {

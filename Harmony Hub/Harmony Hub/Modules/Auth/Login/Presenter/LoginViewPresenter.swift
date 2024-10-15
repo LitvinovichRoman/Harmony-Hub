@@ -7,16 +7,16 @@
 
 import UIKit
 
-//MARK: -- PresenterProtocol
+//MARK: - Presenter Protocol
 protocol LoginViewPresenterProtocol: AnyObject {
     func didUpdateEmailTextField()
     func didUpdatePassTextField()
     func didTapMainButton()
     func didTapBottomButton()
-   
 }
 
-class LoginViewPresenter {
+// MARK: - Final Class LoginViewPresenter
+final class LoginViewPresenter {
     weak var view: LoginViewProtocol?
     
     required init(view: any LoginViewProtocol) {
@@ -24,7 +24,7 @@ class LoginViewPresenter {
     }
 }
 
-//MARK: -- Protocol Methods
+//MARK: - Protocol Methods
 extension LoginViewPresenter: LoginViewPresenterProtocol {
     func didUpdateEmailTextField() {
         //logic for updating emfil text field
@@ -41,5 +41,4 @@ extension LoginViewPresenter: LoginViewPresenterProtocol {
     func didTapBottomButton() {
         view?.navigateToLoginView()
     }
-    
 }

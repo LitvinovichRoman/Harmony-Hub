@@ -7,22 +7,23 @@
 
 import UIKit
 
-class ThoughtCell: UITableViewCell {
-    //MARK: -- Lazy Labels
-    lazy var titleLabel: UILabel = {
+// MARK: - Final Class ThoughtCell
+final class ThoughtCell: UITableViewCell {
+    //MARK: -- Properties
+    var titleLabel: UILabel = {
         $0.font = ThoughtCellConstants.titleLabelFont
         $0.textAlignment = .left
         return $0
     }(UILabel())
     
-    lazy var messageTextLabel: UILabel = {
+    var messageTextLabel: UILabel = {
         $0.numberOfLines = ThoughtCellConstants.messageTextLabelFumberOfLines
         $0.font = ThoughtCellConstants.messageTextLabelFont
         $0.textAlignment = .left
         return $0
     }(UILabel())
     
-    lazy var dateLabel: UILabel = {
+    var dateLabel: UILabel = {
         $0.font = ThoughtCellConstants.dateLabelFont
         $0.textAlignment = .right
         $0.textColor = .lightGray
@@ -41,8 +42,8 @@ class ThoughtCell: UITableViewCell {
 }
 
 //MARK: - Configure Cell
-extension ThoughtCell {
-    private func configureCell() {
+private extension ThoughtCell {
+    func configureCell() {
         layer.cornerRadius = ThoughtCellConstants.cornerRadius
         backgroundColor = ThoughtCellConstants.backgroundColor
         contentView.addSubviews(titleLabel, messageTextLabel, dateLabel)
@@ -62,4 +63,18 @@ extension ThoughtCell {
             ])
         }
     }
+}
+
+//MARK: - ThoughtCellConstants
+fileprivate enum ThoughtCellConstants {
+    static let cornerRadius: CGFloat = 25
+    static let backgroundColor: UIColor = .white.withAlphaComponent(0.4)
+    static let titleLabelFont: UIFont = .boldSystemFont(ofSize: 16)
+    static let messageTextLabelFont: UIFont = .systemFont(ofSize: 14)
+    static let dateLabelFont: UIFont = .systemFont(ofSize: 10)
+    static let messageTextLabelFumberOfLines: Int = 0
+    static let topAnchor: CGFloat = 4
+    static let leadingAnchor: CGFloat = 16
+    static let trailingAnchor: CGFloat = -16
+    static let dateLabelBottomAnchor: CGFloat = -4
 }

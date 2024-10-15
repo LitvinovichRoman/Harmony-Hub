@@ -8,32 +8,41 @@
 import UIKit
 import Kingfisher
 
+// MARK: - CollectionCell Protocol
 protocol CollectionCellProtocol {
     var imageView: UIImageView { get set }
-    func configure(with url: URL)
+    func setImage(from url: URL)
 }
 
-class CollectionCell: UICollectionViewCell {
-    
-    lazy var imageView: UIImageView = {
+// MARK: - Final Class CollectionCell
+final class CollectionCell: UICollectionViewCell, CollectionCellProtocol {
+    // MARK: -- ImageView
+    var imageView: UIImageView = {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         return $0
     }(UIImageView())
     
+    // MARK: -- Init Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupCell()
-        makeCellConstarints()
+        configureCell()
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: -- Set Image
+    func setImage(from url: URL) {
+        imageView.kf.setImage(with: url)
+    }
 }
 
-extension CollectionCell: CollectionCellProtocol {
-    private func makeCellConstarints() {
+// MARK: - Configure Layout
+private extension CollectionCell {
+    func configureLayout() {
         contentView.addSubviews(imageView)
         
         NSLayoutConstraint.activate([
@@ -44,15 +53,18 @@ extension CollectionCell: CollectionCellProtocol {
         ])
     }
     
-    private func setupCell() {
+    func configureCell() {
         layer.cornerRadius = CollectionCellConstants.cornerRadius
         layer.borderColor = Resources.Colors.App.borderColor.cgColor
         layer.borderWidth = CollectionCellConstants.borderWidth
         layer.masksToBounds = true
     }
-    
-    func configure(with url: URL) {
-        imageView.kf.setImage(with: url)
-    }
-    
+}
+
+//MARK: - CollectionCellConstants
+enum CollectionCellConstants {
+    static let cornerRadius: CGFloat = 25
+    static let borderWidth: CGFloat = 2
+    static let itemSize: CGSize = .init(width: 140, height: 140)
+    static let sectionInset: UIEdgeInsets = .init(top: 16, left: 16, bottom: 16, right: 16)
 }

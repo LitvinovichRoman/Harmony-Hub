@@ -7,24 +7,35 @@
 
 import UIKit
 
-class TabView: UIView {
-    
+// MARK: - Final Class TabView
+final class TabView: UIView {
+    // MARK: -- Lifecycle
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        setupView()
+        configureTabBar()
     }
     
+    // MARK: -- Init Method
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-    private func setupView() {
+}
+
+// MARK: - Configure TabView
+private extension TabView {
+    func configureTabBar() {
         backgroundColor = TabViewConstants.backgroundColor
         layer.borderColor = TabViewConstants.borderColor
         layer.borderWidth = TabViewConstants.borderWidth
         layer.cornerRadius = TabViewConstants.cornerRadius
         clipsToBounds = true
-
     }
+}
 
+//MARK: - TabViewConstants
+fileprivate enum TabViewConstants {
+    static let cornerRadius: CGFloat = 35
+    static let backgroundColor: UIColor = .white
+    static let borderWidth: CGFloat = 2
+    static let borderColor = UIColor.systemGray6.cgColor
 }

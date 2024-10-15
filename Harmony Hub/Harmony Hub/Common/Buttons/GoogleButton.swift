@@ -7,25 +7,27 @@
 
 import UIKit
 
-class GoogleButton: UIButton {
-    var completion: () -> Void
+// MARK: - Final Class GoogleButton
+final class GoogleButton: UIButton {
+    var action: () -> Void
     
     init(frame: CGRect = .zero, completion: @escaping () -> Void) {
-        self.completion = completion
+        self.action = completion
         super.init(frame: frame)
-        
         setupGoogleButton()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-    private func setupGoogleButton() {
+}
+
+// MARK: - Configure
+private extension GoogleButton {
+    func setupGoogleButton() {
         addAction(UIAction(handler: { [ weak self ] _ in
             guard let self else { return }
-            completion()
+            action()
         }), for: .touchUpInside)
         
         setImage(Resources.Icons.Auth.googleButton, for: .normal)

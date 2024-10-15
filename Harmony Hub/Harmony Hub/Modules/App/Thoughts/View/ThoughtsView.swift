@@ -7,16 +7,16 @@
 
 import UIKit
 
+// MARK: - ThoughtsView Protocol
 protocol ThoughtsViewProtocol: AnyObject {
     var tableView: UITableView { get set }
 }
 
-class ThoughtsView: BaseAppView, ThoughtsViewProtocol {
-    // MARK: - Presenter
-    var presenter: ThoughtsViewPresenterProtocol!
- 
-    
+// MARK: - Final Class ThoughtsView
+final class ThoughtsView: UIViewController, Backgroundable, ThoughtsViewProtocol {
     // MARK: - Properties
+    var presenter: ThoughtsViewPresenterProtocol!
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(ThoughtCell.self, forCellReuseIdentifier: ThoughtsViewConstants.cellIdentifier)
@@ -29,7 +29,7 @@ class ThoughtsView: BaseAppView, ThoughtsViewProtocol {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackground(with: Resources.Backgrounds.thoughts)
+        makeBackground(image: Resources.Backgrounds.thoughts)
         configureLayout()
         title = Resources.Strings.ThoughtsScreen.thoughtsScreenTitle
     }
@@ -79,13 +79,13 @@ extension ThoughtsView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-// MARK: - Configure layout
+// MARK: - Configure
 private extension ThoughtsView {
     func configureLayout() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, primaryAction: UIAction(handler: { _ in
-            self.presenter.showAlertWithTextFields(from: self, thought: nil)
-        }))
-        contentImage.addSubviews(tableView)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add,
+                                                            primaryAction: UIAction(handler: { _ in self.presenter.showAlertWithTextFields(from: self, thought: nil) } ))
+        
+        view.addSubviews(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -93,4 +93,11 @@ private extension ThoughtsView {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant:  ThoughtsViewConstants.tableViewBottomAnchor),
         ])
     }
+}
+
+//MARK: - ThoughtsViewConstants
+fileprivate enum ThoughtsViewConstants {
+    static let cellIdentifier: String = "ThoughtCell"
+    static let dateFormat: String = "dd.MM.yyyy HH:mm"
+    static let tableViewBottomAnchor: CGFloat = -100
 }

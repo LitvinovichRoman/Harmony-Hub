@@ -1,5 +1,5 @@
 //
-//  MainButton.swift
+//  BottomButton.swift
 //  Harmony Hub
 //
 //  Created by Roman Litvinovich on 18.07.24.
@@ -7,15 +7,14 @@
 
 import UIKit
 
-class MainButton: UIButton {
-    let roundingRadius: CGFloat = 25
-    
+// MARK: - Final Class BottomButton
+final class BottomButton: UIButton {
     var title: String
-    var completion: () -> Void
+    var action: () -> Void
     
     init(title: String, completion: @escaping () -> Void) {
         self.title = title
-        self.completion = completion
+        self.action = completion
         super.init(frame: .zero)
         configureButton()
     }
@@ -23,16 +22,18 @@ class MainButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private func configureButton() {
+}
+
+// MARK: - Configure
+private extension BottomButton {
+    func configureButton() {
         addAction(UIAction(handler: { [ weak self ] _ in
             guard let self else { return }
-            completion()
+            action()
         }), for: .touchUpInside)
         
         setTitle(title, for: .normal)
-        backgroundColor = Resources.Colors.Auth.mainButtonBackgroundColor
-        setTitleColor(Resources.Colors.Auth.mainButtonTitleColor, for: .normal)
-        layer.cornerRadius = roundingRadius
+        backgroundColor = .clear
+        setTitleColor(Resources.Colors.Auth.bottomButtonTitleColor, for: .normal)
     }
 }

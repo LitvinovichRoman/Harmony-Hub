@@ -9,7 +9,8 @@ import Foundation
 import FirebaseStorage
 import FirebaseFirestore
 
-class FirebaseManager {
+// MARK: - Final Class FirebaseManager
+final class FirebaseManager {
     
     // MARK: - Properties
     static let shared = FirebaseManager()
@@ -67,6 +68,8 @@ class FirebaseManager {
             }
         }
     }
+    
+    // MARK: - Fetch Meditation
 
 
 }
