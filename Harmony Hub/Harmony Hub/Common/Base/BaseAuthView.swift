@@ -20,78 +20,72 @@ protocol RegistraionViewDelegate {
 }
 
 // MARK: - BaseAuthClass
-class BaseAuthView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
+class BaseAuthView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, Backgroundable {
+    
     //MARK: -- Properties
-    private lazy var contentImage: UIImageView = {
-        $0.isUserInteractionEnabled = true
-        return $0
-    }(UIImageView())
+    var isLoginView: Bool = false
     
     var titleLabel: UILabel = {
-        $0.text = ""
         $0.textAlignment = .left
         $0.textColor = Resources.Colors.Auth.titleLabelColor
         $0.font = BaseAuthClassConstants.titleFont
         return $0
     }(UILabel())
-            
+    
     var googleTitleLabel: UILabel = {
         return $0
     }(UILabel())
     
-    
-    //MARK: -- Properties [Text Fields]
+    // TextField
     var usernameTextField = TextField(placeholder: "")
     var emailTextField = TextField(placeholder: "")
     var passwordTextField = TextField(placeholder: "")
     
-    //MARK: -- Properties [Buttons]
+    // Buttons
     var mainButton = MainButton(title: "") {}
     lazy var googleSignInButton = GoogleButton {}
     lazy var bottomButton = BottomButton(title: "") {}
     
-    //MARK: -- Properties [Stacks]
+    // StackViews
     var textFieldsStackView = UIStackView()
     var buttonsStackView = UIStackView()
     
     //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        makeBackground(image: toggleImage())
         configureLayout()
+        swipeAction()
     }
-    
-    //MARK: Called if we are on the registration screen
-    func removeUponLogin(_ show: Bool) {
-        switch show {
+}
+
+
+//MARK: - Toggle Actions
+extension BaseAuthView {
+    func toggleView() {
+        switch isLoginView {
         case true:
             textFieldsStackView.remove(usernameTextField)
+            titleLabel.text = Resources.Strings.Auth.loginTitle
         case false:
             textFieldsStackView.insertArrangedSubview(usernameTextField, at: 0)
+            titleLabel.text = Resources.Strings.Auth.registrationTitle
         }
     }
     
+    func toggleImage() -> UIImage {
+        return isLoginView ? Resources.Backgrounds.login : Resources.Backgrounds.registration
+    }
 }
 
 
 //MARK: - Configure
 private extension BaseAuthView {
-    //MARK: -- Configure Background
-    func configureBackground(with image: UIImage) {
-        view.addSubviews(contentImage)
-        contentImage.image = image
-        NSLayoutConstraint.activate([
-            contentImage.topAnchor.constraint(equalTo: view.topAnchor),
-            contentImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            contentImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            contentImage.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
     
     //MARK: -- Configure Layout
     func configureLayout() {
         setupStackViews()
-        configureBackground(with: UIImage())
-        contentImage.addSubviews(titleLabel, textFieldsStackView, buttonsStackView)
+        view.addSubviews(titleLabel, textFieldsStackView, buttonsStackView)
         
         makeTitleConstraint()
         makeTextFieldsStackViewConstraint()
@@ -107,7 +101,6 @@ private extension BaseAuthView {
         ])
     }
     
-    //MARK: -- Setup StackViews
     func setupStackViews() {
         textFieldsStackView = UIStackView(arrangedSubviews: [usernameTextField, emailTextField, passwordTextField])
         textFieldsStackView.axis = .vertical
@@ -121,7 +114,6 @@ private extension BaseAuthView {
         
     }
     
-    //MARK: -- TextFieldsStackView Constraints
     func makeTextFieldsStackViewConstraint() {
         NSLayoutConstraint.activate([
             emailTextField.heightAnchor.constraint(equalToConstant: BaseAuthClassConstants.textFieldsHeight),
@@ -135,7 +127,6 @@ private extension BaseAuthView {
         
     }
     
-    //MARK: -- ButtonStackView Constraints
     func makeButtonStackViewConstraint() {
         NSLayoutConstraint.activate([
             mainButton.heightAnchor.constraint(equalToConstant: BaseAuthClassConstants.buttonsHeight),
@@ -165,7 +156,7 @@ extension BaseAuthView {
         view.frame.origin.y = 0
     }
     
-    @objc(gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:) func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    @objc func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
     

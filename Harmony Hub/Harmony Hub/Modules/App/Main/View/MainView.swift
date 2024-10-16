@@ -69,11 +69,14 @@ final class MainView: UIViewController, Backgroundable, MainViewProtocol {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = Resources.Strings.MainScreen.greetings + " \(name)!"
         makeBackground(image: Resources.Backgrounds.main)
+     
+        configureLayout()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         presenter.loadImageURLs()
         presenter.showDailyTip()
-        configureLayout()
     }
 }
 
@@ -102,6 +105,7 @@ extension MainView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
 //MARK: - Configure
 private extension MainView {
     func configureLayout() {
+        title = Resources.Strings.MainScreen.greetings + " \(name)!"
         view.addSubviews(topLabel, tipOfTheDayLabel, bottomLabel, collectionView)
         
         makeTopLabelConstraint()

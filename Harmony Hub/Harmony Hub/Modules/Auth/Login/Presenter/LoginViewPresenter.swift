@@ -9,8 +9,6 @@ import UIKit
 
 //MARK: - Presenter Protocol
 protocol LoginViewPresenterProtocol: AnyObject {
-    func didUpdateEmailTextField()
-    func didUpdatePassTextField()
     func didTapMainButton()
     func didTapBottomButton()
 }
@@ -18,6 +16,7 @@ protocol LoginViewPresenterProtocol: AnyObject {
 // MARK: - Final Class LoginViewPresenter
 final class LoginViewPresenter {
     weak var view: LoginViewProtocol?
+    let authManager = AuthManager()
     
     required init(view: any LoginViewProtocol) {
         self.view = view
@@ -26,19 +25,22 @@ final class LoginViewPresenter {
 
 //MARK: - Protocol Methods
 extension LoginViewPresenter: LoginViewPresenterProtocol {
-    func didUpdateEmailTextField() {
-        //logic for updating emfil text field
-    }
-    
-    func didUpdatePassTextField() {
-        //logic for updating password text field
-    }
-    
     func didTapMainButton() {
-        print("MainButton: from LoginViewPresenterProtocol")
+        let email = view?.emailTextField.text ?? ""
+        let password = view?.passwordTextField.text ?? ""
+        
+        let user = User(email: email, password: password)
+        authManager.login(user: user) { result in
+            switch result {
+            case .success:
+                NotificationCenter.default.post(name: .setRootViewController, object: nil, userInfo: [ Keys.viewController : StateCase.main ])
+            case .failure(let failure):
+                print(failure)
+            }
+        }
     }
     
     func didTapBottomButton() {
-        view?.navigateToLoginView()
+        view?.navigateToRegistrationView()
     }
 }

@@ -7,7 +7,10 @@
 
 import Foundation
 
-// MARK: - Final Class User
-final class User {
-    
+// MARK: - User
+struct User {
+    var id: String = UUID().uuidString
+    let email: String
+    let password: String
+    var name: String?
 }

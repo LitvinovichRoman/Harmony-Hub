@@ -10,32 +10,37 @@ import UIKit
 //MARK: - RegistrationView Protocol
 protocol RegistrationViewProtocol: AnyObject {
     func navigateToLoginView()
+    var usernameTextField: TextField { set get }
+    var emailTextField: TextField { set get }
+    var passwordTextField: TextField { set get }
 }
 
 // MARK: - Final Class RegistrationView
-final class RegistrationView: BaseAuthView, RegistrationViewProtocol, Backgroundable {
+final class RegistrationView: BaseAuthView, RegistrationViewProtocol {
     var presenter: RegistrationViewPresenterProtocol!
-    
+      
     //MARK: -- Lifecycle
+    override func loadView() {
+        super.loadView()
+        isLoginView = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeBackground(image: Resources.Backgrounds.registration)
+        toggleView()
         initialize()
         setActions()
     }
     
     func navigateToLoginView() {
         let loginView = LoginView()
-        loginView.modalPresentationStyle = .fullScreen
-        loginView.modalTransitionStyle = .partialCurl
-        self.present(loginView, animated: true)
+        navigationController?.pushViewController(loginView, animated: true)
     }
 }
 
 //MARK: - Configure
 private extension RegistrationView  {
     func initialize() {
-        titleLabel.text = Resources.Strings.Auth.loginTitle
         usernameTextField.placeholder = Resources.Strings.Auth.namePlaceholder
         emailTextField.placeholder = Resources.Strings.Auth.emailPlaceholder
         passwordTextField.placeholder = Resources.Strings.Auth.passPlaceholder
@@ -45,7 +50,12 @@ private extension RegistrationView  {
     
     func setActions() {
         presenter = RegistrationViewPresenter(view: self)
-        mainButton.action = { self.presenter.didTapMainButton() }
-        bottomButton.action = { self.presenter.didTapBottomButton() }
+        mainButton.action = { [ weak self ] in
+            self?.presenter.didTapMainButton()
+        }
+        
+        bottomButton.action = { [ weak self ] in
+            self?.presenter.didTapBottomButton()
+        }
     }
 }

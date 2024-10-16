@@ -8,34 +8,42 @@
 import UIKit
 //MARK: -  LoginView Protocol
 protocol LoginViewProtocol: AnyObject {
-    func navigateToLoginView()
+    func navigateToRegistrationView()
+    var emailTextField: TextField { set get }
+    var passwordTextField: TextField { set get }
 }
 
 // MARK: - Final Class LoginView
-final class LoginView: BaseAuthView, Backgroundable, LoginViewProtocol {
-    //MARK: -- Presenter
-    var presenter: LoginViewPresenterProtocol!
+final class LoginView: BaseAuthView, LoginViewProtocol {
     
+    //MARK: -- Properties
+    var presenter: LoginViewPresenterProtocol!
+   
     //MARK: -- Lifecycle
+    override func loadView() {
+        super.loadView()
+        isLoginView = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeBackground(image: Resources.Backgrounds.registration)
+        toggleView()
         initialize()
         setActions()
     }
     
-    func navigateToLoginView() {
-        let regView = RegistrationView()
-        regView.modalPresentationStyle = .fullScreen
-        regView.modalTransitionStyle = .partialCurl
-        self.present(regView, animated: true)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    func navigateToRegistrationView() {
+        navigationController?.popToRootViewController(animated: true)
     }
 }
 
 //MARK: - Configure
 private extension LoginView {
     func initialize() {
-        removeUponLogin(true)
         titleLabel.text = Resources.Strings.Auth.loginTitle
         usernameTextField.placeholder = Resources.Strings.Auth.namePlaceholder
         emailTextField.placeholder = Resources.Strings.Auth.emailPlaceholder
@@ -54,4 +62,5 @@ private extension LoginView {
             self?.presenter.didTapBottomButton()
         }
     }
+    
 }
