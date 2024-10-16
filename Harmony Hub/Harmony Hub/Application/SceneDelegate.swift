@@ -20,6 +20,8 @@ enum Keys: String {
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+    private let authManager = AuthManager()
+    private var navigationController: UINavigationController!
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         NotificationCenter.default.addObserver(self, selector: #selector(setRootViewController(notification: )),
@@ -27,16 +29,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = windowManager(viewController: .main)
+        
+        switch authManager.isLogin() {
+        case true:
+            window?.rootViewController = windowManager(viewController: .main)
+        case false:
+            window?.rootViewController = windowManager(viewController: .reg)
+        }
+        
         window?.makeKeyAndVisible()
     }
     
     private func windowManager(viewController: StateCase) -> UIViewController {
         switch viewController {
         case .login:
-            return Builder.getLoginView()
+            navigationController = UINavigationController(rootViewController: Builder.getLoginView())
+            navigationController?.navigationBar.isHidden = true
+            return navigationController
         case .reg:
-            return Builder.getRegistrationView()
+            navigationController = UINavigationController(rootViewController: Builder.getRegistrationView())
+            navigationController?.navigationBar.isHidden = true
+            return navigationController
         case .main:
             return Builder.getTabBar()
         }
@@ -45,6 +58,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     @objc private func setRootViewController(notification: Notification) {
         guard let userInfo = notification.userInfo,
               let viewController = userInfo[Keys.viewController] as? StateCase else { return }
+        self.window?.rootViewController = windowManager(viewController: viewController)
         self.window?.rootViewController = windowManager(viewController: viewController)
     }
     
