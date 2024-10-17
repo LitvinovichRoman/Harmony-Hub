@@ -21,5 +21,18 @@
 	</dict>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1050599295896-9m4mv0oquc1lvieq8bk38ah14q7vcrkr</string>
+			</array>
+		</dict>
+	</array>
+	<key>GIDClientID</key>
+	<string>1050599295896-9m4mv0oquc1lvieq8bk38ah14q7vcrkr.apps.googleusercontent.com</string>
 </dict>
 </plist>
