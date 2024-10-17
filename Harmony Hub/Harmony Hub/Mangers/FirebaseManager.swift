@@ -8,15 +8,16 @@
 import Foundation
 import FirebaseStorage
 import FirebaseFirestore
+import FirebaseAuth
 
 // MARK: - Final Class FirebaseManager
 final class FirebaseManager {
-    
-    // MARK: - Properties
+    // MARK: -- Properties
     static let shared = FirebaseManager()
     let storage = Storage.storage()
+    let db = Firestore.firestore()
     
-    // MARK: - Image Retrieval
+    // MARK: -- Image Retrieval
     func retrieveImageURLs(path: String, completion: @escaping (Result<[URL], Error>) -> Void) {
         let posesRef = storage.reference().child(path)
         
@@ -46,11 +47,9 @@ final class FirebaseManager {
         }
     }
     
-    // MARK: - Fetch Daily Tip
+    // MARK: -- Fetch Daily Tip
     func fetchDailyTip(completion: @escaping (String?) -> Void) {
-        let db = Firestore.firestore()
-        
-        db.collection("tips").document("dailyTips").getDocument { (document, error) in
+        db.collection("tips").document("dailyTips").getDocument { document, error in
             if let document = document, document.exists {
                 let data = document.data()
                 let tips = data?["tipsArray"] as? [String] ?? []
@@ -59,17 +58,27 @@ final class FirebaseManager {
                     let randomIndex = Int(arc4random_uniform(UInt32(tips.count)))
                     let tip = tips[randomIndex]
                     completion(tip)
-                } else {
-                    completion(nil)
-                }
-            } else {
-                print("Document does not exist")
-                completion(nil)
-            }
+                } else { completion(nil) } }
+            else { completion(nil) }
         }
     }
     
-    // MARK: - Fetch Meditation
-
-
+    // MARK: -- Fetch Name
+    func fetchName(completion: @escaping (String?) -> Void) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            completion(nil)
+            return
+        }
+        
+        db.collection("users").document(userId).getDocument { document, error in
+            if error != nil { completion(nil) }
+            else if let document = document, document.exists {
+                let data = document.data()
+                let name = data?["name"] as? String
+                completion(name)
+            }
+            else { completion(nil) }
+        }
+    }
+    
 }
