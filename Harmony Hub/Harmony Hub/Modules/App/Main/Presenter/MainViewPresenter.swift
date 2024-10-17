@@ -13,6 +13,7 @@ protocol MainViewPresenterProtocol {
     func imageURL(at index: Int) -> URL?
     func loadImageURLs()
     func showDailyTip()
+    func showGreeting()
 }
 
 // MARK: - Final Class MainViewPresenter
@@ -43,9 +44,15 @@ final class MainViewPresenter: MainViewPresenterProtocol {
     
     func showDailyTip() {
         model.fetchDailyTip { [weak self] tip in
+            DispatchQueue.main.async { self?.view?.tipOfTheDayLabel.text = tip ?? "" }
+        }
+    }
+    
+    func showGreeting() {
+        FirebaseManager.shared.fetchName { [weak self] name in
             DispatchQueue.main.async {
-                self?.view?.tipOfTheDayLabel.text = tip ?? "No tip for today"
-            }
+                self?.view?.title = Resources.Strings.MainScreen.greetings + " \(name ?? "")"
+            }  
         }
     }
     

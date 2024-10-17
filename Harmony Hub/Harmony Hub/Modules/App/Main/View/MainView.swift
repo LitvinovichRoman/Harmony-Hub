@@ -6,22 +6,20 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 //MARK: -- MainView Protocol
 protocol MainViewProtocol: AnyObject {
     var tipOfTheDayLabel: UILabel { get set }
-    var collectionView: UICollectionView { get set }
+    var collectionView: UICollectionView { get }
+    var title: String? { get set }
 }
 
 //MARK: - Final Class MainView
 final class MainView: UIViewController, Backgroundable, MainViewProtocol {
-    //MARK: -- Mock
-    private let name = "Джош"
-    
-    //MARK: - Presenter
+    //MARK: - Properties
     var presenter: MainViewPresenterProtocol!
-    
-    //MARK: - Properties[lazy labels]
+
     private lazy  var topLabel: UILabel = {
         $0.text = Resources.Strings.MainScreen.tipOfTheDayText
         $0.textColor = Resources.Colors.App.textColor
@@ -50,7 +48,7 @@ final class MainView: UIViewController, Backgroundable, MainViewProtocol {
         return $0
     }(UILabel())
     
-    //MARK: -- Properties[collectionView]
+    //MARK: -- CollectionView
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CollectionCellConstants.itemSize
@@ -70,13 +68,14 @@ final class MainView: UIViewController, Backgroundable, MainViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         makeBackground(image: Resources.Backgrounds.main)
-     
         configureLayout()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.loadImageURLs()
         presenter.showDailyTip()
+        presenter.showGreeting()
     }
 }
 
@@ -105,7 +104,6 @@ extension MainView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
 //MARK: - Configure
 private extension MainView {
     func configureLayout() {
-        title = Resources.Strings.MainScreen.greetings + " \(name)!"
         view.addSubviews(topLabel, tipOfTheDayLabel, bottomLabel, collectionView)
         
         makeTopLabelConstraint()
