@@ -35,16 +35,17 @@ final class TabBarPresenter: TabBarPresenterProtocol {
     }
     
     func setupControllers() {
-        let mainView = Builder.getMainView()
-        let breathView = Builder.getBreathView()
-        let thoughtsView = Builder.getThoughtsView()
-        let profileView =  Builder.getProfileView()
+        let mainView = UINavigationController(rootViewController: Builder.getMainView())
+        let breathView = UINavigationController(rootViewController: Builder.getBreathView())
+        let thoughtsView = UINavigationController(rootViewController: Builder.getThoughtsView())
+        let profileView =  UINavigationController(rootViewController: Builder.getProfileView())
         
-        view?.setControllers(views: [
-            UINavigationController(rootViewController: mainView),
-            UINavigationController(rootViewController: breathView),
-            UINavigationController(rootViewController: thoughtsView),
-            UINavigationController(rootViewController: profileView)])
+        let controllers = [mainView, breathView, thoughtsView, profileView]
+        controllers.forEach {
+            $0.navigationBar.tintColor = .black
+        }
+        
+        view?.setControllers(views: controllers)
     }
 }
 

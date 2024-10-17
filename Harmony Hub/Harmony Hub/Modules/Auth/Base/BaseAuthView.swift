@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 // MARK: - Delegates
 protocol AuthDelegate: AnyObject {
@@ -24,7 +25,7 @@ class BaseAuthView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     //MARK: -- Properties
     var isLoginView: Bool = false
-    
+  
     var titleLabel: UILabel = {
         $0.textAlignment = .left
         $0.textColor = Resources.Colors.Auth.titleLabelColor
@@ -44,6 +45,7 @@ class BaseAuthView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     // Buttons
     var mainButton = MainButton(title: "") {}
     lazy var googleSignInButton = GoogleButton {}
+    
     lazy var bottomButton = BottomButton(title: "") {}
     
     // StackViews
@@ -60,7 +62,7 @@ class BaseAuthView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
 }
 
 
-//MARK: - Toggle Actions
+//MARK: -  Togle Actions
 extension BaseAuthView {
     func toggleView() {
         switch isLoginView {
@@ -115,6 +117,7 @@ private extension BaseAuthView {
     }
     
     func makeTextFieldsStackViewConstraint() {
+        passwordTextField.isSecureTextEntry = true
         NSLayoutConstraint.activate([
             emailTextField.heightAnchor.constraint(equalToConstant: BaseAuthClassConstants.textFieldsHeight),
             usernameTextField.heightAnchor.constraint(equalToConstant: BaseAuthClassConstants.textFieldsHeight),
