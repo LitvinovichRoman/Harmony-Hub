@@ -10,13 +10,13 @@ import UIKit
 //MARK: - Presenter Protocol
 protocol LoginViewPresenterProtocol: AnyObject {
     func didTapMainButton()
-    func didTapBottomButton()
+    func didTapGoogleButton()
 }
 
 // MARK: - Final Class LoginViewPresenter
 final class LoginViewPresenter {
     weak var view: LoginViewProtocol?
-    let authManager = AuthManager()
+    private let authManager = AuthManager()
     
     required init(view: any LoginViewProtocol) {
         self.view = view
@@ -40,7 +40,16 @@ extension LoginViewPresenter: LoginViewPresenterProtocol {
         }
     }
     
-    func didTapBottomButton() {
-        view?.navigateToRegistrationView()
+    func didTapGoogleButton() {
+        guard let viewController = view as? UIViewController else { return }
+        
+        authManager.loginWithGoogle(presentingViewController: viewController) { result in
+            switch result {
+            case .success:
+                NotificationCenter.default.post(name: .setRootViewController, object: nil, userInfo: [ Keys.viewController : StateCase.main ])
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

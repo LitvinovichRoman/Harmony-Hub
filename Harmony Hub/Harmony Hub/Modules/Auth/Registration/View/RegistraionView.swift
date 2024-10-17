@@ -9,7 +9,6 @@ import UIKit
 
 //MARK: - RegistrationView Protocol
 protocol RegistrationViewProtocol: AnyObject {
-    func navigateToLoginView()
     var usernameTextField: TextField { set get }
     var emailTextField: TextField { set get }
     var passwordTextField: TextField { set get }
@@ -31,11 +30,6 @@ final class RegistrationView: BaseAuthView, RegistrationViewProtocol {
         initialize()
         setActions()
     }
-    
-    func navigateToLoginView() {
-        let loginView = LoginView()
-        navigationController?.pushViewController(loginView, animated: true)
-    }
 }
 
 //MARK: - Configure
@@ -55,7 +49,12 @@ private extension RegistrationView  {
         }
         
         bottomButton.action = { [ weak self ] in
-            self?.presenter.didTapBottomButton()
+            let loginView = LoginView()
+            self?.navigationController?.pushViewController(loginView, animated: true)
+        }
+        
+        googleSignInButton.action = { [ weak self ] in
+            self?.presenter.didTapGoogleButton()
         }
     }
 }

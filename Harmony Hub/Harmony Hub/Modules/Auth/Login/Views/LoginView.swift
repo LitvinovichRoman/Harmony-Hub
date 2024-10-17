@@ -8,7 +8,6 @@
 import UIKit
 //MARK: -  LoginView Protocol
 protocol LoginViewProtocol: AnyObject {
-    func navigateToRegistrationView()
     var emailTextField: TextField { set get }
     var passwordTextField: TextField { set get }
 }
@@ -32,13 +31,6 @@ final class LoginView: BaseAuthView, LoginViewProtocol {
         setActions()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    func navigateToRegistrationView() {
-        navigationController?.popToRootViewController(animated: true)
-    }
 }
 
 //MARK: - Configure
@@ -59,7 +51,11 @@ private extension LoginView {
         }
         
         bottomButton.action = { [ weak self ] in
-            self?.presenter.didTapBottomButton()
+            self?.navigationController?.popToRootViewController(animated: true)
+        }
+        
+        googleSignInButton.action = { [ weak self ] in
+            self?.presenter.didTapGoogleButton()
         }
     }
     

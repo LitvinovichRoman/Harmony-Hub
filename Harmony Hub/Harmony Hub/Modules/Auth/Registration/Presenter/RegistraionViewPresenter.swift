@@ -9,14 +9,14 @@ import UIKit
 
 //MARK: - Presenter Protocol
 protocol RegistrationViewPresenterProtocol: AnyObject {
-    func didTapBottomButton()
     func didTapMainButton()
+    func didTapGoogleButton()
 }
 
 // MARK: - Final Calass RegistrationViewPresenter
 final class RegistrationViewPresenter {
     weak var view: RegistrationViewProtocol?
-    let authManager = AuthManager()
+    private let authManager = AuthManager()
     
     required init(view: RegistrationViewProtocol) {
         self.view = view
@@ -28,9 +28,9 @@ extension RegistrationViewPresenter: RegistrationViewPresenterProtocol  {
     func didTapMainButton() {
         let email = view?.emailTextField.text
         let password = view?.passwordTextField.text
-        //let name = view?.usernameTextField.text
+        let name = view?.usernameTextField.text
         
-        let user = User(email: email ?? "", password: password ?? "")
+        let user = User(email: email ?? "", password: password ?? "", name: name)
         authManager.createUser(user: user) { result in
             switch result {
             case .success:
@@ -42,8 +42,18 @@ extension RegistrationViewPresenter: RegistrationViewPresenterProtocol  {
         }
     }
     
-    func didTapBottomButton() {
-        view?.navigateToLoginView()
+    func didTapGoogleButton() {
+        guard let viewController = view as? UIViewController else { return }
+        
+        authManager.loginWithGoogle(presentingViewController: viewController) { result in
+            switch result {
+            case .success:
+                NotificationCenter.default.post(name: .setRootViewController, object: nil, userInfo: [ Keys.viewController : StateCase.main ])
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
+    
 }
 
