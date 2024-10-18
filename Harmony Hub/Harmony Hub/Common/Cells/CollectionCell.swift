@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import Kingfisher
 
 // MARK: - CollectionCell Protocol
@@ -44,13 +45,7 @@ final class CollectionCell: UICollectionViewCell, CollectionCellProtocol {
 private extension CollectionCell {
     func configureLayout() {
         contentView.addSubviews(imageView)
-        
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        ])
+        imageView.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
     
     func configureCell() {

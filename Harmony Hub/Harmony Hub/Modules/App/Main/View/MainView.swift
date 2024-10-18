@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SnapKit
 import FirebaseFirestore
 
-//MARK: -- MainView Protocol
+//MARK: - MainView Protocol
 protocol MainViewProtocol: AnyObject {
     var tipOfTheDayLabel: UILabel { get set }
     var collectionView: UICollectionView { get }
@@ -19,7 +20,7 @@ protocol MainViewProtocol: AnyObject {
 final class MainView: UIViewController, Backgroundable, MainViewProtocol {
     //MARK: - Properties
     var presenter: MainViewPresenterProtocol!
-
+    
     private lazy  var topLabel: UILabel = {
         $0.text = Resources.Strings.MainScreen.tipOfTheDayText
         $0.textColor = Resources.Colors.App.textColor
@@ -29,12 +30,13 @@ final class MainView: UIViewController, Backgroundable, MainViewProtocol {
     }(UILabel())
     
     lazy var tipOfTheDayLabel: UILabel = {
-        $0.textColor = Resources.Colors.App.textColor
-        $0.numberOfLines = MainViewConstants.numberOfLines
+        $0.snp.makeConstraints { $0.height.equalTo(MainViewConstants.tipOfTheDayLabelHeight) }
         $0.backgroundColor = MainViewConstants.tipOfTheDayBackgroundColor
         $0.layer.borderColor = Resources.Colors.App.borderColor.cgColor
-        $0.layer.borderWidth = MainViewConstants.borderWidth
         $0.layer.cornerRadius = MainViewConstants.cornerRadius
+        $0.layer.borderWidth = MainViewConstants.borderWidth
+        $0.numberOfLines = MainViewConstants.numberOfLines
+        $0.textColor = Resources.Colors.App.textColor
         $0.layer.masksToBounds = true
         $0.textAlignment = .center
         return $0
@@ -51,8 +53,8 @@ final class MainView: UIViewController, Backgroundable, MainViewProtocol {
     //MARK: -- CollectionView
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CollectionCellConstants.itemSize
         layout.sectionInset = CollectionCellConstants.sectionInset
+        layout.itemSize = CollectionCellConstants.itemSize
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: MainViewConstants.cellIdentifier)
@@ -64,7 +66,7 @@ final class MainView: UIViewController, Backgroundable, MainViewProtocol {
         return collectionView
     }()
     
-    //MARK: - Lifecycle
+    //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         makeBackground(image: Resources.Backgrounds.main)
@@ -113,37 +115,32 @@ private extension MainView {
     }
     
     func makeTopLabelConstraint() {
-        NSLayoutConstraint.activate([
-            topLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: MainViewConstants.topLabelTop),
-            topLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  MainViewConstants.leadingAnchor),
-            topLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: MainViewConstants.trailingAnchor)
-        ])
+        topLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(MainViewConstants.topLabelTop)
+            $0.leading.trailing.equalTo(view).inset(MainViewConstants.side)
+        }
     }
     
     func makeTipOfTheDayLabelConstraint() {
-        NSLayoutConstraint.activate([
-            tipOfTheDayLabel.heightAnchor.constraint(equalToConstant: MainViewConstants.tipOfTheDayLabelHeight),
-            tipOfTheDayLabel.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: MainViewConstants.tipOfTheDayLabelTop),
-            tipOfTheDayLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: MainViewConstants.leadingAnchor),
-            tipOfTheDayLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  MainViewConstants.trailingAnchor)
-        ])
+        tipOfTheDayLabel.snp.makeConstraints {
+            $0.top.equalTo(topLabel.snp.bottom).offset(MainViewConstants.topForLabel)
+            $0.leading.trailing.equalTo(view).inset(MainViewConstants.side)
+        }
     }
     
     func makeBottomLabelConstraint() {
-        NSLayoutConstraint.activate([
-            bottomLabel.topAnchor.constraint(equalTo: tipOfTheDayLabel.bottomAnchor, constant: MainViewConstants.bottomLabelTop),
-            bottomLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: MainViewConstants.leadingAnchor),
-            bottomLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  MainViewConstants.trailingAnchor),
-        ])
+        bottomLabel.snp.makeConstraints {
+            $0.top.equalTo(tipOfTheDayLabel.snp.bottom).offset(MainViewConstants.topForLabel)
+            $0.leading.trailing.equalTo(view).inset(MainViewConstants.side)
+        }
     }
     
     func makeCollectionViewConstraint() {
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: bottomLabel.bottomAnchor, constant: MainViewConstants.collectionViewTop),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: MainViewConstants.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  MainViewConstants.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: MainViewConstants.collectionViewBottom)
-        ])
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(bottomLabel.snp.bottom).offset(MainViewConstants.collectionViewTop)
+            $0.leading.trailing.equalTo(view).inset(MainViewConstants.side)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(MainViewConstants.collectionViewBottom)
+        }
     }
     
 }
@@ -156,12 +153,10 @@ fileprivate enum MainViewConstants {
     static let cornerRadius: CGFloat = 25
     static let borderWidth: CGFloat = 2
     static let cellIdentifier: String = "MainCell"
-    static let tipOfTheDayLabelTop: CGFloat = 24
+    static let topForLabel: CGFloat = 24
     static let tipOfTheDayLabelHeight: CGFloat = 200
-    static let bottomLabelTop: CGFloat = 24
     static let topLabelTop: CGFloat = 12
     static let collectionViewTop: CGFloat = 4
-    static let leadingAnchor: CGFloat = 8
-    static let trailingAnchor: CGFloat = -8
-    static let collectionViewBottom: CGFloat = -70
+    static let side: CGFloat = 8
+    static let collectionViewBottom: CGFloat = 70
 }

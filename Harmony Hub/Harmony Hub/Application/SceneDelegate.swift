@@ -34,7 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         case true:
             window?.rootViewController = windowManager(viewController: .main)
         case false:
-            window?.rootViewController = windowManager(viewController: .reg)
+            window?.rootViewController = windowManager(viewController: .login)
         }
         
         window?.makeKeyAndVisible()

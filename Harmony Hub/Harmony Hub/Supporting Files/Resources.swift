@@ -106,7 +106,7 @@ enum Resources {
         
         enum Auth {
             static let titleLabelColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            static let bottomButtonTitleColor = #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
+            static let bottomButtonTitleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.8)
             static let textFieldBackgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             static let textFieldTextColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             static let mainButtonBackgroundColor = #colorLiteral(red: 0.631372549, green: 0.4666666667, blue: 0.4431372549, alpha: 1)

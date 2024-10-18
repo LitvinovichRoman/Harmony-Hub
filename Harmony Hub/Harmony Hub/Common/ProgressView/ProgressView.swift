@@ -73,9 +73,7 @@ private extension ProgressView {
 
 // MARK: - Set Methods
 extension ProgressView {
-    func setProgress(to newScore: Int) {
-        score = newScore
-    }
+    func setProgress(to newScore: Int) { score = newScore }
     
     func setColors(grey: UIColor, bow: UIColor) {
         greyColor = grey.cgColor

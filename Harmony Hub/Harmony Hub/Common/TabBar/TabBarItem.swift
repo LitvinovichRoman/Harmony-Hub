@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 // MARK: - Final Class TabBarItem
 final class TabBarItem: UIView {
@@ -36,8 +37,7 @@ final class TabBarItem: UIView {
     private lazy var tabImage: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.image = tabItem.tabImage
-        $0.heightAnchor.constraint(equalToConstant: TabBarItemConstants.tabImageHeightAnchor).isActive = true
-        $0.widthAnchor.constraint(equalToConstant: TabBarItemConstants.tabImageWidthAnchor).isActive = true
+        $0.snp.makeConstraints { $0.size.equalTo(TabBarItemConstants.tabImageSize)}
         return $0
     }(UIImageView())
     
@@ -77,49 +77,42 @@ private extension TabBarItem {
         
         imageRightConstraints = tabImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  TabBarItemConstants.newImageRightConstraints)
         imageRightConstraints?.isActive = !isActive
-        
         makeContentViewConstarint()
         makeTabImageConstarint()
         makeTabTextConstarint()
     }
     
     func makeContentViewConstarint() {
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
-        ])
+        contentView.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
     
     func makeTabImageConstarint() {
-        NSLayoutConstraint.activate([
-            tabImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: TabBarItemConstants.tabImageTopAnchor),
-            tabImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: TabBarItemConstants.tabImageLeadingAnchor),
-            tabImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: TabBarItemConstants.tabImageBottomAnchor),
-        ])
+        tabImage.snp.makeConstraints {
+            $0.top.equalTo(contentView).offset(TabBarItemConstants.tabImageTop)
+            $0.leading.equalTo(contentView).offset(TabBarItemConstants.tabImageLeading)
+            $0.bottom.equalTo(contentView).offset(TabBarItemConstants.tabImageBottom)
+        }
     }
     
     func makeTabTextConstarint() {
-        NSLayoutConstraint.activate([
-            tabText.leadingAnchor.constraint(equalTo: tabImage.trailingAnchor, constant: TabBarItemConstants.tabTextLeadingAnchor),
-            tabText.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: TabBarItemConstants.tabTextTrailingAnchor),
-            tabText.centerYAnchor.constraint(equalTo: tabImage.centerYAnchor)
-        ])
+        tabText.snp.makeConstraints {
+            $0.leading.equalTo(tabImage.snp.trailing).offset(TabBarItemConstants.tabTextLeading)
+            $0.trailing.equalTo(contentView).offset(TabBarItemConstants.tabTextTrailing)
+            $0.centerY.equalTo(tabImage)
+        }
     }
-    
 }
 
 //MARK: - TabBarItemConstants
 fileprivate enum TabBarItemConstants {
     static let animateDuration: TimeInterval = 0.2
     static let cornerRadius: CGFloat = 20
-    static let tabImageHeightAnchor: CGFloat = 25
-    static let tabImageWidthAnchor: CGFloat = 25
+    static let tabImageSize: CGFloat = 25
     static let newImageRightConstraints: CGFloat = -10
-    static let tabImageTopAnchor: CGFloat = 10
-    static let tabImageBottomAnchor: CGFloat = -10
-    static let tabImageLeadingAnchor: CGFloat = 10
-    static let tabTextLeadingAnchor: CGFloat = 8
-    static let tabTextTrailingAnchor: CGFloat = -10
+    static let tabImageTop: CGFloat = 10
+    static let tabImageBottom: CGFloat = -10
+    static let tabImageLeading: CGFloat = 10
+    static let tabTextLeading: CGFloat = 10
+    static let tabTextTrailing: CGFloat = -10
 }
+

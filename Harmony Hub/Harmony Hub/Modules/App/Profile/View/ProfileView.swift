@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol ProfileViewProtocol: AnyObject {}
 
@@ -16,14 +17,14 @@ final class ProfileView: UIViewController, Backgroundable, ProfileViewProtocol {
     var authManager = AuthManager()
     
     lazy var signOutButton: UIButton = {
-        $0.backgroundColor = .black
-        $0.setTitle("Exit", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
-        $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        $0.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        $0.layer.masksToBounds = true
-        $0.layer.cornerRadius = 20
         $0.addAction(presenter.signOut, for: .touchUpInside)
+        $0.snp.makeConstraints { $0.height.equalTo(40) }
+        $0.snp.makeConstraints { $0.width.equalTo(80) }
+        $0.setTitleColor(.white, for: .normal)
+        $0.setTitle("Exit", for: .normal)
+        $0.layer.masksToBounds = true
+        $0.backgroundColor = .black
+        $0.layer.cornerRadius = 20
         return $0
     }(UIButton())
     
@@ -43,10 +44,7 @@ private extension ProfileView {
     
     func configureButton() {
         view.addSubviews(signOutButton)
-        NSLayoutConstraint.activate([
-            signOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signOutButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+        signOutButton.snp.makeConstraints { $0.center.equalToSuperview() }
     }
 }
 

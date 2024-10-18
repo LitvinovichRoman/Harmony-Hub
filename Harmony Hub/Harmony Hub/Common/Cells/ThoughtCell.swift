@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SpriteKit
 
 // MARK: - Final Class ThoughtCell
 final class ThoughtCell: UITableViewCell {
@@ -51,16 +52,23 @@ private extension ThoughtCell {
     }
     
     func setConstraints(_ elements: UIView...) {
-        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: ThoughtCellConstants.topAnchor).isActive = true
-        messageTextLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ThoughtCellConstants.topAnchor).isActive = true
-        dateLabel.topAnchor.constraint(equalTo: messageTextLabel.bottomAnchor, constant: ThoughtCellConstants.topAnchor).isActive = true
-        dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: ThoughtCellConstants.dateLabelBottomAnchor).isActive = true
+        elements.enumerated().forEach { index, view in
+            view.snp.makeConstraints {
+                switch index {
+                case 0:  $0.top.equalTo(contentView).offset(ThoughtCellConstants.top)
+                default: $0.top.equalTo(elements[index - 1].snp.bottom).offset(ThoughtCellConstants.top)
+                }
+            }
+        }
+
+        elements.last?.snp.makeConstraints {
+            $0.bottom.equalTo(contentView).offset(ThoughtCellConstants.dateLabelBottom)
+        }
         
         elements.forEach {
-            NSLayoutConstraint.activate([
-                $0.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: ThoughtCellConstants.leadingAnchor),
-                $0.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: ThoughtCellConstants.trailingAnchor),
-            ])
+            $0.snp.makeConstraints {
+                $0.leading.trailing.equalTo(contentView).inset(ThoughtCellConstants.side)
+            }
         }
     }
 }
@@ -73,8 +81,7 @@ fileprivate enum ThoughtCellConstants {
     static let messageTextLabelFont: UIFont = .systemFont(ofSize: 14)
     static let dateLabelFont: UIFont = .systemFont(ofSize: 10)
     static let messageTextLabelFumberOfLines: Int = 0
-    static let topAnchor: CGFloat = 4
-    static let leadingAnchor: CGFloat = 16
-    static let trailingAnchor: CGFloat = -16
-    static let dateLabelBottomAnchor: CGFloat = -4
+    static let top: CGFloat = 4
+    static let side: CGFloat = 16
+    static let dateLabelBottom: CGFloat = -4
 }

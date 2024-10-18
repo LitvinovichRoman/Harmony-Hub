@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import GoogleSignIn
 
 // MARK: - Delegates
@@ -25,32 +26,41 @@ class BaseAuthView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     //MARK: -- Properties
     var isLoginView: Bool = false
-  
+    
     var titleLabel: UILabel = {
-        $0.textAlignment = .left
         $0.textColor = Resources.Colors.Auth.titleLabelColor
         $0.font = BaseAuthClassConstants.titleFont
-        return $0
-    }(UILabel())
-    
-    var googleTitleLabel: UILabel = {
+        $0.textAlignment = .left
         return $0
     }(UILabel())
     
     // TextField
     var usernameTextField = TextField(placeholder: "")
     var emailTextField = TextField(placeholder: "")
-    var passwordTextField = TextField(placeholder: "")
+    var passwordTextField: TextField = {
+        $0.isSecureTextEntry = true
+        return $0
+    }(TextField(placeholder: ""))
     
     // Buttons
     var mainButton = MainButton(title: "") {}
-    lazy var googleSignInButton = GoogleButton {}
-    
-    lazy var bottomButton = BottomButton(title: "") {}
+    var googleSignInButton = GoogleButton {}
+    var bottomButton = BottomButton(title: "") {}
     
     // StackViews
-    var textFieldsStackView = UIStackView()
-    var buttonsStackView = UIStackView()
+    lazy var textFieldsStackView: UIStackView = {
+        $0.spacing = BaseAuthClassConstants.textFieldStackSpacing
+        $0.axis = .vertical
+        return $0
+    }(UIStackView(arrangedSubviews: [usernameTextField, emailTextField, passwordTextField]))
+    
+    lazy var buttonsStackView: UIStackView = {
+        $0.spacing = BaseAuthClassConstants.buttonsStackSpacing
+        $0.alignment = .fill
+        $0.axis = .vertical
+        return $0
+    }(UIStackView(arrangedSubviews: [mainButton, googleSignInButton, bottomButton]))
+    
     
     //MARK: -- Lifecycle
     override func viewDidLoad() {
@@ -83,10 +93,7 @@ extension BaseAuthView {
 
 //MARK: - Configure
 private extension BaseAuthView {
-    
-    //MARK: -- Configure Layout
     func configureLayout() {
-        setupStackViews()
         view.addSubviews(titleLabel, textFieldsStackView, buttonsStackView)
         
         makeTitleConstraint()
@@ -94,58 +101,44 @@ private extension BaseAuthView {
         makeButtonStackViewConstraint()
     }
     
-    //MARK: -- Tittle Constraints
     func makeTitleConstraint() {
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: BaseAuthClassConstants.titleLabelTopAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: BaseAuthClassConstants.titleLabelLeadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: BaseAuthClassConstants.titleLabelTrailingAnchor)
-        ])
-    }
-    
-    func setupStackViews() {
-        textFieldsStackView = UIStackView(arrangedSubviews: [usernameTextField, emailTextField, passwordTextField])
-        textFieldsStackView.axis = .vertical
-        textFieldsStackView.spacing = BaseAuthClassConstants.textFieldStackSpacing
-        
-        buttonsStackView = UIStackView(arrangedSubviews: [mainButton, googleSignInButton, bottomButton])
-        buttonsStackView.axis = .vertical
-        buttonsStackView.spacing = BaseAuthClassConstants.buttonsStackSpacing
-        buttonsStackView.alignment = .fill
-        
-        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(BaseAuthClassConstants.titleLabelTop)
+            $0.leading.trailing.equalTo(view).inset(BaseAuthClassConstants.side)
+        }
     }
     
     func makeTextFieldsStackViewConstraint() {
-        passwordTextField.isSecureTextEntry = true
-        NSLayoutConstraint.activate([
-            emailTextField.heightAnchor.constraint(equalToConstant: BaseAuthClassConstants.textFieldsHeight),
-            usernameTextField.heightAnchor.constraint(equalToConstant: BaseAuthClassConstants.textFieldsHeight),
-            passwordTextField.heightAnchor.constraint(equalToConstant: BaseAuthClassConstants.textFieldsHeight),
-            
-            textFieldsStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: BaseAuthClassConstants.textFieldsStackViewTopAnchor),
-            textFieldsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: BaseAuthClassConstants.textFieldsStackViewLeadingAnchor),
-            textFieldsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: BaseAuthClassConstants.textFieldsStackViewTrailingAnchor),
-        ])
+        let textFields = [usernameTextField, emailTextField, passwordTextField]
+        textFields.forEach { $0.snp.makeConstraints { $0.height.equalTo(BaseAuthClassConstants.buttonsAndFieldsHeight) } }
         
+        textFieldsStackView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(BaseAuthClassConstants.textFieldsStackViewTop)
+            $0.leading.trailing.equalTo(view).inset(BaseAuthClassConstants.side)
+        }
     }
     
     func makeButtonStackViewConstraint() {
-        NSLayoutConstraint.activate([
-            mainButton.heightAnchor.constraint(equalToConstant: BaseAuthClassConstants.buttonsHeight),
-            bottomButton.heightAnchor.constraint(equalToConstant: BaseAuthClassConstants.buttonsHeight),
-            buttonsStackView.topAnchor.constraint(equalTo: textFieldsStackView.bottomAnchor, constant: BaseAuthClassConstants.buttonsStackViewTopAnchor),
-            buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: BaseAuthClassConstants.textFieldsStackViewLeadingAnchor),
-            buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: BaseAuthClassConstants.textFieldsStackViewTrailingAnchor)
-        ])
+        let buttons = [mainButton, bottomButton]
+        buttons.forEach { $0.snp.makeConstraints { $0.height.equalTo(BaseAuthClassConstants.buttonsAndFieldsHeight) } }
+        
+        buttonsStackView.snp.makeConstraints {
+            $0.top.equalTo(textFieldsStackView.snp.bottom).offset(BaseAuthClassConstants.buttonsStackViewTop)
+            $0.leading.trailing.equalTo(view).inset(BaseAuthClassConstants.side)
+        }
     }
 }
 
 //MARK: - Setup Keyboard
 extension BaseAuthView {
     func keyboardObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
@@ -178,15 +171,11 @@ extension BaseAuthView {
 //MARK: - BaseAuthClassConstants
 enum BaseAuthClassConstants {
     static let titleFont: UIFont = .systemFont(ofSize: 24, weight: .bold)
-    static let titleLabelTopAnchor: CGFloat = 200
-    static let titleLabelLeadingAnchor: CGFloat = 5
-    static let titleLabelTrailingAnchor: CGFloat = -5
-    static let textFieldsHeight: CGFloat = 50
+    static let titleLabelTop: CGFloat = 100
+    static let side: CGFloat = 5
     static let buttonsStackSpacing: CGFloat = 50
-    static let buttonsHeight: CGFloat = 50
+    static let buttonsAndFieldsHeight: CGFloat = 50
     static let textFieldStackSpacing: CGFloat = 20.0
-    static let textFieldsStackViewTopAnchor: CGFloat = 50
-    static let buttonsStackViewTopAnchor: CGFloat = 30
-    static let textFieldsStackViewLeadingAnchor: CGFloat = 5
-    static let textFieldsStackViewTrailingAnchor: CGFloat = -5
+    static let textFieldsStackViewTop: CGFloat = 50
+    static let buttonsStackViewTop: CGFloat = 30
 }

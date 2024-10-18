@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 // MARK: - TabBarView Protocol
 protocol TabBarViewProtocol: AnyObject {
@@ -20,11 +21,11 @@ final class TabBarView: UITabBarController, TabBarViewProtocol {
     
     private lazy var tabViewStack: UIStackView = {
         $0.backgroundColor = TabBarViewConstants.tabViewStackBacgroundColor
-        $0.clipsToBounds = true
         $0.layer.cornerRadius = TabBarViewConstants.cornerRadius
-        $0.axis = .horizontal
-        $0.alignment = .center
         $0.distribution = .equalSpacing
+        $0.clipsToBounds = true
+        $0.alignment = .center
+        $0.axis = .horizontal
         return $0
     }(UIStackView())
     
@@ -45,7 +46,7 @@ final class TabBarView: UITabBarController, TabBarViewProtocol {
     }
 }
 
-//MARK: -- Configure
+//MARK: - Configure
 private extension TabBarView {
     func tabBarConfigure() {
         tabBar.isHidden = true
@@ -56,18 +57,16 @@ private extension TabBarView {
     }
     
     func setConstraints() {
-        NSLayoutConstraint.activate([
-            tabView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: TabBarViewConstants.tabViewLeadingAnchor),
-            tabView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: TabBarViewConstants.tabViewTrailingAnchor),
-            tabView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tabView.heightAnchor.constraint(equalToConstant: TabBarViewConstants.tabViewHeightAnchor),
-            
-            tabViewStack.topAnchor.constraint(equalTo: tabView.topAnchor),
-            tabViewStack.bottomAnchor.constraint(equalTo: tabView.bottomAnchor),
-            tabViewStack.leadingAnchor.constraint(equalTo: tabView.leadingAnchor, constant: TabBarViewConstants.tabViewStackLeadingAnchor),
-            tabViewStack.trailingAnchor.constraint(equalTo: tabView.trailingAnchor, constant: TabBarViewConstants.tabViewStackTrailingAnchor)
-            
-        ])
+        tabView.snp.makeConstraints {
+            $0.height.equalTo(TabBarViewConstants.tabViewHeight)
+            $0.leading.trailing.equalTo(view).inset(TabBarViewConstants.side)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        tabViewStack.snp.makeConstraints {
+            $0.top.bottom.equalTo(tabView)
+            $0.leading.trailing.equalTo(tabView).inset(TabBarViewConstants.side)
+        }
     }
     
     func configureTabBar(pages: [TabItem]) {
@@ -96,10 +95,7 @@ fileprivate enum TabBarViewConstants {
     static let cornerRadius: CGFloat = 35
     static let tabBarBacgroundColor: UIColor = .white.withAlphaComponent(0.5)
     static let tabViewStackBacgroundColor: UIColor = .white
-    static let tabViewLeadingAnchor: CGFloat = 10
-    static let tabViewTrailingAnchor: CGFloat = -10
-    static let tabViewHeightAnchor: CGFloat = 70
-    static let tabViewStackLeadingAnchor: CGFloat = 10
-    static let tabViewStackTrailingAnchor: CGFloat = -10
+    static let side: CGFloat = 10
+    static let tabViewHeight: CGFloat = 70
     static let itemOffset: Int = 0
 }

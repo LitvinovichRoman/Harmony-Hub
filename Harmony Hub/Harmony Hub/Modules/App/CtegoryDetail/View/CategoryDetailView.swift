@@ -19,23 +19,27 @@ final class CategoryDetailView: UIViewController, Backgroundable, CategoryDetail
     var presenter: CategotyDetailViewPresenterProtocol!
     
     private lazy var subView: UIView = {
+        $0.snp.makeConstraints { $0.height.equalTo(CategoryDetailViewConstants.subViewHeight) }
+        $0.snp.makeConstraints { $0.width.equalTo(CategoryDetailViewConstants.subViewWidth) }
+        $0.layer.cornerRadius = CategoryDetailViewConstants.cornerRadius
         $0.layer.borderColor = Resources.Colors.App.borderColor.cgColor
         $0.layer.borderWidth = CategoryDetailViewConstants.borderWidth
         $0.backgroundColor = Resources.Colors.App.accent
-        $0.layer.cornerRadius = CategoryDetailViewConstants.cornerRadius
         $0.layer.masksToBounds = true
         return $0
     }(UIView())
     
     lazy var imageView: UIImageView = {
+        $0.snp.makeConstraints { $0.height.equalTo( CategoryDetailViewConstants.imageViewHeight) }
+        $0.snp.makeConstraints { $0.width.equalTo( CategoryDetailViewConstants.imageViewWidth) }
         $0.layer.cornerRadius = CategoryDetailViewConstants.cornerRadius
         $0.layer.masksToBounds = true
         return $0
     }(UIImageView())
     
     private lazy var centerLabel: UILabel = {
-        $0.text = Resources.Strings.MainScreen.posesTitle
         $0.backgroundColor = CategoryDetailViewConstants.labelBacgroundColor
+        $0.text = Resources.Strings.MainScreen.posesTitle
         $0.font = CategoryDetailViewConstants.labelFont
         $0.textAlignment = .center
         return $0
@@ -43,8 +47,8 @@ final class CategoryDetailView: UIViewController, Backgroundable, CategoryDetail
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CollectionCellConstants.itemSize
         layout.sectionInset = CollectionCellConstants.sectionInset
+        layout.itemSize = CollectionCellConstants.itemSize
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CategoryDetailViewConstants.cellIdentifier)
@@ -100,38 +104,29 @@ private extension CategoryDetailView {
     
     
     func makeSubViewConstraints() {
-        NSLayoutConstraint.activate([
-            subView.heightAnchor.constraint(equalToConstant: CategoryDetailViewConstants.subViewHeightAnchor),
-            subView.widthAnchor.constraint(equalToConstant: CategoryDetailViewConstants.subViewWidthAnchor),
-            subView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: CategoryDetailViewConstants.subViewTopAnchor),
-            subView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
+        subView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(CategoryDetailViewConstants.subViewTop)
+            $0.centerX.equalTo(view)
+        }
     }
     
     func makeImageViewConstraints() {
-        NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: CategoryDetailViewConstants.imageViewHeightAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: CategoryDetailViewConstants.imageViewWidthAnchor),
-            imageView.centerXAnchor.constraint(equalTo: subView.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: subView.centerYAnchor),
-        ])
+        imageView.snp.makeConstraints { $0.center.equalToSuperview() }
     }
     
     func makeCenterLabelConstraints() {
-        NSLayoutConstraint.activate([
-            centerLabel.topAnchor.constraint(equalTo: subView.bottomAnchor, constant: CategoryDetailViewConstants.centerLabelTopAnchor),
-            centerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CategoryDetailViewConstants.leadingAnchor),
-            centerLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CategoryDetailViewConstants.trailingAnchor),
-        ])
+        centerLabel.snp.makeConstraints {
+            $0.top.equalTo(subView.snp.bottom).offset(CategoryDetailViewConstants.centerLabelTop)
+            $0.leading.trailing.equalTo(view).inset(CategoryDetailViewConstants.side)
+        }
     }
     
     func makeCollectionViewConstraints() {
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: centerLabel.bottomAnchor, constant: CategoryDetailViewConstants.leadingAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: CategoryDetailViewConstants.bottomAnchor),
-        ])
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(centerLabel.snp.bottom).offset(CategoryDetailViewConstants.side)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view).inset(CategoryDetailViewConstants.bottom)
+        }
     }
     
 }
@@ -143,14 +138,14 @@ fileprivate enum CategoryDetailViewConstants {
     static let borderWidth: CGFloat = 2
     static let labelBacgroundColor: UIColor = .white.withAlphaComponent(0.5)
     static let labelFont: UIFont = .systemFont(ofSize: 20, weight: .bold)
-    static let subViewHeightAnchor: CGFloat = 255
-    static let subViewWidthAnchor : CGFloat = 354
-    static let subViewTopAnchor: CGFloat = 22
-    static let imageViewHeightAnchor: CGFloat = 200
-    static let imageViewWidthAnchor: CGFloat = 200
-    static let centerLabelTopAnchor: CGFloat = 16
-    static let leadingAnchor: CGFloat = 8
-    static let trailingAnchor: CGFloat = -8
-    static let bottomAnchor: CGFloat = -100
+    static let subViewHeight: CGFloat = 255
+    static let subViewWidth: CGFloat = 354
+    static let subViewTop: CGFloat = 22
+    static let imageViewHeight: CGFloat = 200
+    static let imageViewWidth: CGFloat = 200
+    static let centerLabelTop: CGFloat = 16
+    static let side: CGFloat = 8
+    static let trailing: CGFloat = -8
+    static let bottom: CGFloat = 100
 }
 

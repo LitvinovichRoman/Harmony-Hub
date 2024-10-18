@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 // MARK: - Backgroundable Protocol
 protocol Backgroundable: UIViewController {
@@ -16,14 +17,9 @@ extension Backgroundable {
     func makeBackground(backgroundImage: UIImageView = UIImageView(), image: UIImage) {
         backgroundImage.isUserInteractionEnabled = true
         backgroundImage.contentMode = .scaleAspectFill
-        view.addSubviews(backgroundImage)
         backgroundImage.image = image
         
-        NSLayoutConstraint.activate([
-            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        view.addSubviews(backgroundImage)
+        backgroundImage.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
 }
