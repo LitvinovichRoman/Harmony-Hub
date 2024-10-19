@@ -7,7 +7,7 @@
  */
 
 "main" = "Home";
-"breath" = "Breath";
+"meditation" = "Meditation";
 "thoughts" = "thoughts";
 "profile" = "profile";
 "dayAdvice" = "Daily advice";
@@ -26,7 +26,7 @@
 "regButtonTitle" = "Register";
 "logButtonTitle" = "Login";
 "addButtonTitle" = "Record a thought";
-"breathScreenTitle" = "Breath control";
+"awarenessScreenTitle" = "Awareness";
 "startButtonTitle" = "Start";
 "stopButtonTitle" = "Stop";
 "logo" = "Harmony Hub";

@@ -13,7 +13,7 @@ enum Resources {
     enum Strings {
         enum TabBar {
             static let main: String = .localize("main")
-            static let breath: String = .localize("breath")
+            static let meditation: String = .localize("meditation")
             static let thoughts: String = .localize("thoughts")
             static let profile: String = .localize("profile")
         }
@@ -49,8 +49,8 @@ enum Resources {
             static let thoughtsSaveAction: String = .localize("thoughtsSaveAction")
         }
         
-        enum BreathScreen {
-            static let breathScreenTitle: String = .localize("breathScreenTitle")
+        enum AwarenessScreen {
+            static let awarenessScreenTitle: String = .localize("awarenessScreenTitle")
             static let startButtonTitle: String = .localize("startButtonTitle")
             static let stopButtonTitle: String = .localize("stopButtonTitle")
         }
@@ -65,7 +65,7 @@ enum Resources {
     //MARK: -- Resources[Backgrounds]
     enum Backgrounds {
         static let main = #imageLiteral(resourceName: "mainBg")
-        static let breath = #imageLiteral(resourceName: "breathBg")
+        static let awareness = #imageLiteral(resourceName: "awarenessBg")
         static let thoughts = #imageLiteral(resourceName: "thoughtsBg")
         static let profile = #imageLiteral(resourceName: "profileBg")
         static let login = #imageLiteral(resourceName: "loginViewBg")
@@ -76,7 +76,7 @@ enum Resources {
     enum Icons {
         enum TabBar {
             static let main = #imageLiteral(resourceName: "mainTab")
-            static let breath = #imageLiteral(resourceName: "breathTab")
+            static let meditation = #imageLiteral(resourceName: "awarenessTab")
             static let thoughts = #imageLiteral(resourceName: "thoughtsTab")
             static let profile = #imageLiteral(resourceName: "profileTab")
         }
@@ -85,8 +85,10 @@ enum Resources {
             static let newThought = #imageLiteral(resourceName: "newThought")
         }
         
-        enum Auth {
+        enum Buttons {
             static let googleButton = #imageLiteral(resourceName: "googleButton")
+            static let playButton = #imageLiteral(resourceName: "playButton")
+            static let stopButton = #imageLiteral(resourceName: "stopButton")
         }
     }
     

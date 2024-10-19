@@ -7,7 +7,7 @@
 */
 
 "main" = "Главная";
-"breath" = "Дыхание";
+"meditation" = "Медитация";
 "thoughts" = "Мысли";
 "profile" = "Профиль";
 "dayAdvice" = "Совет дня";
@@ -24,7 +24,7 @@
 "emailPlaceholder" = "Введите email";
 "passPlaceholder" = "Введите пароль";
 "addButtonTitle" = "Записать мысль";
-"breathScreenTitle" = "Контроль дыхания";
+"awarenessScreenTitle" = "Осознанность";
 "startButtonTitle" = "Начать";
 "stopButtonTitle" = "Остановить";
 "logo" = "Harmony Hub";
