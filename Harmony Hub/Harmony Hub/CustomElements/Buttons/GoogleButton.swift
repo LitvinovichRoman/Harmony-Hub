@@ -30,6 +30,6 @@ private extension GoogleButton {
             action()
         }), for: .touchUpInside)
         
-        setImage(Resources.Icons.Auth.googleButton, for: .normal)
+        setImage(Resources.Icons.Buttons.googleButton, for: .normal)
     }
 }
