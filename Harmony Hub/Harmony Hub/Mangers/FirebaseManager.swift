@@ -18,10 +18,10 @@ final class FirebaseManager {
     let db = Firestore.firestore()
     
     // MARK: -- Image Retrieval
-    func retrieveImageURLs(path: String, completion: @escaping (Result<[URL], Error>) -> Void) {
-        let posesRef = storage.reference().child(path)
+    func retrieveDataURLs(path: String, completion: @escaping (Result<[URL], Error>) -> Void) {
+        let dataRef = storage.reference().child(path)
         
-        posesRef.listAll { (result, error) in
+        dataRef.listAll { (result, error) in
             if let error = error {
                 completion(.failure(error))
             } else if let result = result {

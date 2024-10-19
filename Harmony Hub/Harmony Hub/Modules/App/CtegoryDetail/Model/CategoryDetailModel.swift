@@ -30,7 +30,7 @@ final class CategoryDetailModel: CategoryDetailModelProtocol {
     
     func fetchImageURLs(forCategoryAt index: Int, completion: @escaping (Result<[URL], Error>) -> Void) {
         guard let path = PosesPathForSelectedCategiry.paths[index] else { return }
-        FirebaseManager.shared.retrieveImageURLs(path: path) { result in
+        FirebaseManager.shared.retrieveDataURLs(path: path) { result in
             completion(result)
         }
     }

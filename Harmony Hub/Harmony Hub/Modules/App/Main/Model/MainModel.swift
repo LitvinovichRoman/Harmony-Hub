@@ -16,7 +16,7 @@ protocol MainModelProtocol {
 // MARK: - Final Class MainModel
 final class MainModel: MainModelProtocol {
     func fetchImageURLs(completion: @escaping (Result<[URL], Error>) -> Void) {
-        FirebaseManager.shared.retrieveImageURLs(path: "categories") { result in
+        FirebaseManager.shared.retrieveDataURLs(path: "categories") { result in
             completion(result)
         }
     }
