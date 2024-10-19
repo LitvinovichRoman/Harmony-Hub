@@ -60,10 +60,10 @@ final class Builder {
         return view
     }
     
-    // Breath
-    static func getBreathView() -> UIViewController {
-        let view = BreathView()
-        let presenter = BreathViewPresenter(view: view)
+    // Awareness
+    static func getAwarenessView() -> UIViewController {
+        let view = AwarenessView()
+        let presenter = AwarenessViewPresenter(view: view)
         view.presenter = presenter
         return view
     }
